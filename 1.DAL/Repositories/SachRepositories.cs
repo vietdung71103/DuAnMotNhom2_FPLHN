@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace _1.DAL.IRepositories
 {
-    public class ISachRepositories
+    public class SachRepositories
     {
     }
 }

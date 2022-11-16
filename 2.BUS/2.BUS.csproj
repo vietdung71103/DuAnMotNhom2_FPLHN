@@ -5,4 +5,9 @@
     <RootNamespace>_2.BUS</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="IServices\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
