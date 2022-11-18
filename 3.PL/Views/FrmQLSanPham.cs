@@ -1,4 +1,6 @@
-﻿using System;
+﻿using _2.BUS.IServices;
+using _2.BUS.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,10 +15,20 @@ namespace _3.PL.Views
     public partial class FrmQLSanPham : Form
     {
         FrmMain frm;
+        IQLSachServices _iQLSach;
         public FrmQLSanPham()
         {
             InitializeComponent();
             frm = new FrmMain();
+            _iQLSach = new QLSachServices();
+            LoadCBB();
+        }
+        void LoadCBB()
+        {
+            foreach (var c in _iQLSach.GetListSach())
+            {
+                cbb_sach.Items.Add(c.Ten);
+            }
         }
         Form activeForm;
         private void OpenChildForm(Form childForm, object btnSender)

@@ -17,12 +17,14 @@ namespace _1.DAL.IRepositories
         public bool Add(GioHangChiTiet obj)
         {
            _dbContext.GioHangChiTiets.Add(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
         public bool Delete(GioHangChiTiet obj)
         {
             _dbContext.GioHangChiTiets.Remove(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
@@ -39,6 +41,7 @@ namespace _1.DAL.IRepositories
         public bool Update(GioHangChiTiet obj)
         {
             _dbContext.GioHangChiTiets.Update(obj);
+            _dbContext.SaveChanges();
             return true;
         }
     }

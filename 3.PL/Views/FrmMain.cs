@@ -96,5 +96,11 @@ namespace _3.PL.Views
             FrmQLKhachHang frm = new FrmQLKhachHang();
             ChangeForm(frm);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FrmMain frm = new FrmMain();
+            ChangeForm(frm);
+        }
     }
 }

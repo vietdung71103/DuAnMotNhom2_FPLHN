@@ -13,12 +13,14 @@ namespace _1.DAL.Models
         public Guid IdTacGia { get; set; }
         public Guid IdTheLoai { get; set; }
         public Guid IdNXB { get; set; }
+        public Guid IdAnh { get; set; }
         public string MoTa { get; set; }
         public decimal GiaNhap { get; set; }
         public decimal GiaBan { get; set; }
         public int SoLuongTon { get; set; }
         public int SoTrang { get; set; }
 
+        public virtual Anh? Anh { get; set; }
         public virtual Sach? Sach { get; set; }
         public virtual NXB? NXB { get; set; }
         public virtual TheLoai? TheLoai { get; set; }

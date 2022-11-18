@@ -22,12 +22,14 @@ namespace _1.DAL.IRepositories
         public bool Add(KhachHang obj)
         {
             _dbContext.KhachHangs.Add(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
         public bool Delete(KhachHang obj)
         {
             _dbContext.KhachHangs.Remove(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
@@ -40,6 +42,7 @@ namespace _1.DAL.IRepositories
         public bool Update(KhachHang obj)
         {
             _dbContext.KhachHangs.Update(obj);
+            _dbContext.SaveChanges();
             return true;
         }
     }

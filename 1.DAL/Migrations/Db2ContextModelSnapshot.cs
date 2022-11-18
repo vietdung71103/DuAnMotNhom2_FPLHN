@@ -19,6 +19,26 @@ namespace _1.DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("_1.DAL.Models.Anh", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DuongDan")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Ma")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Ten")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Anh");
+                });
+
             modelBuilder.Entity("_1.DAL.Models.ChucVu", b =>
                 {
                     b.Property<Guid>("Id")
@@ -208,7 +228,16 @@ namespace _1.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Anh")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)")
+                        .HasColumnName("AnhNhanVien");
+
                     b.Property<string>("DiaChi")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(200)");
 
@@ -280,6 +309,9 @@ namespace _1.DAL.Migrations
                     b.Property<decimal>("GiaNhap")
                         .HasColumnType("decimal");
 
+                    b.Property<Guid>("IdAnh")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("IdNXB")
                         .HasColumnType("uniqueidentifier");
 
@@ -302,6 +334,8 @@ namespace _1.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdAnh");
 
                     b.HasIndex("IdNXB");
 
@@ -433,6 +467,12 @@ namespace _1.DAL.Migrations
 
             modelBuilder.Entity("_1.DAL.Models.SachChiTiet", b =>
                 {
+                    b.HasOne("_1.DAL.Models.Anh", "Anh")
+                        .WithMany()
+                        .HasForeignKey("IdAnh")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("_1.DAL.Models.NXB", "NXB")
                         .WithMany()
                         .HasForeignKey("IdNXB")
@@ -456,6 +496,8 @@ namespace _1.DAL.Migrations
                         .HasForeignKey("IdTheLoai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Anh");
 
                     b.Navigation("NXB");
 

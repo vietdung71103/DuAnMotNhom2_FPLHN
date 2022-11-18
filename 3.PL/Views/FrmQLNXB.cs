@@ -1,4 +1,7 @@
-﻿using System;
+﻿using _1.DAL.Models;
+using _2.BUS.IServices;
+using _2.BUS.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +15,122 @@ namespace _3.PL.Views
 {
     public partial class FrmQLNXB : Form
     {
+        IQLNXBServices _services;
+        Guid _getID;
         public FrmQLNXB()
         {
             InitializeComponent();
+            _services = new QLNXBServices();
+            LoadData();
         }
+        void ResetForm()
+        {
+            LoadData();
 
+            tbt_ma.Text = "";
+            tbt_ten.Text = "";
+        }
+        void LoadData()
+        {
+            dtg_show.Rows.Clear();
+            dtg_show.ColumnCount = 4;
+            int stt = 1;
+            dtg_show.Columns[0].Name = "ID";
+            dtg_show.Columns[0].Visible = false;
+            dtg_show.Columns[1].Name = "STT";
+            dtg_show.Columns[2].Name = "Mã sách";
+            dtg_show.Columns[3].Name = "Tên sách";
+            foreach (var x in _services.GetListNXB())
+            {
+                dtg_show.Rows.Add(x.Id, stt++, x.Ma, x.Ten);
+            }
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btn_them_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn thêm ?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show(_services.Add(new NXB()
+                {
+                    Ma = tbt_ma.Text,
+                    Ten = tbt_ten.Text
+                }));
+                ResetForm();
+            }
+            else
+            {
+                return;
+
+            }
+        }
+
+        private void btn_sua_Click(object sender, EventArgs e)
+        {
+
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn sửa ?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (_services.GetListNXB().Any(c => c.Id == _getID) == false)
+                {
+                    MessageBox.Show("Không tìm thấy");
+                }
+                else
+                {
+                    foreach (var x in _services.GetListNXB().Where(c => c.Id == _getID))
+                    {
+
+                        x.Ten = tbt_ten.Text;
+                        MessageBox.Show(_services.Update(x));
+                        ResetForm();
+                    }
+
+                }
+            }
+        }
+
+        private void btn_xoa_Click(object sender, EventArgs e)
+        {
+            var xoa = _services.GetListNXB().Where(c => c.Id == _getID).FirstOrDefault();
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xoá ?", "Thông Báo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                MessageBox.Show(_services.Delete(xoa));
+                ResetForm();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void dtg_show_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rd = e.RowIndex;
+            if (rd == -1 || rd >= _services.GetListNXB().Count) return;
+            _getID = Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value));
+            tbt_ma.Text = Convert.ToString(dtg_show.Rows[rd].Cells[2].Value);
+            tbt_ten.Text = Convert.ToString(dtg_show.Rows[rd].Cells[3].Value);
+        }
+
+        private void tbt_timkiem_TextChanged(object sender, EventArgs e)
+        {
+            dtg_show.Rows.Clear();
+            dtg_show.ColumnCount = 4;
+            int stt = 1;
+            dtg_show.Columns[0].Name = "ID";
+            dtg_show.Columns[0].Visible = false;
+            dtg_show.Columns[1].Name = "STT";
+            dtg_show.Columns[2].Name = "Mã sách";
+            dtg_show.Columns[3].Name = "Tên sách";
+            foreach (var x in _services.GetListNXB().Where(c=>c.Ten.ToLower().Contains(tbt_timkiem.Text)))
+            {
+                dtg_show.Rows.Add(x.Id, stt++, x.Ma, x.Ten);
+            }
         }
     }
 }

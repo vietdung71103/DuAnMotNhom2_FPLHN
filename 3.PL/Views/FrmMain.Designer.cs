@@ -207,6 +207,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Màn hình chính";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // panel1
             // 
@@ -235,7 +236,7 @@
             this.Controls.Add(this.pnl_menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
-            this.Text = "FrmMain";
+            this.Text = "Được 10 điểm tự cắt dái";
             this.pnl_menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

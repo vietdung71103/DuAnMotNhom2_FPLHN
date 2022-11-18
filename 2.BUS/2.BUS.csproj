@@ -6,8 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="IServices\" />
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\1.DAL\1.DAL.csproj" />
   </ItemGroup>
 
 </Project>

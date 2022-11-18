@@ -21,12 +21,14 @@ namespace _1.DAL.IRepositories
         public bool Add(ChucVu obj)
         {
             _dbContext.ChucVus.Add(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
         public bool Delete(ChucVu obj)
         {
             _dbContext.ChucVus.Remove(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
@@ -39,6 +41,7 @@ namespace _1.DAL.IRepositories
         public bool Update(ChucVu obj)
         {
             _dbContext.ChucVus.Update(obj);
+            _dbContext.SaveChanges();
             return true;
         }
     }

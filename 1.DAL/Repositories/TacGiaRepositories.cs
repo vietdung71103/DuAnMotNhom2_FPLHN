@@ -21,12 +21,14 @@ namespace _1.DAL.IRepositories
         public bool Add(TacGia obj)
         {
            _dbContext.TacGias.Add(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
         public bool Delete(TacGia obj)
         {
             _dbContext.TacGias.Remove(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
@@ -39,6 +41,7 @@ namespace _1.DAL.IRepositories
         public bool Update(TacGia obj)
         {
             _dbContext.TacGias.Update(obj);
+            _dbContext.SaveChanges();
             return true;
         }
     }

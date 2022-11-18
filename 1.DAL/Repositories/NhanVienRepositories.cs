@@ -21,12 +21,14 @@ namespace _1.DAL.IRepositories
         public bool Add(NhanVien obj)
         {
             _dbContext.NhanViens.Add(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
         public bool Delete(NhanVien obj)
         {
             _dbContext.NhanViens.Remove(obj);
+            _dbContext.SaveChanges();
             return true;
         }
 
@@ -39,6 +41,7 @@ namespace _1.DAL.IRepositories
         public bool Update(NhanVien obj)
         {
             _dbContext.NhanViens.Update(obj);
+            _dbContext.SaveChanges();
             return true;
         }
     }

@@ -14,6 +14,8 @@ namespace _1.DAL.Models
         public string Ten { get; set; }
         public string GioiTinh { get; set; }
         public string DiaChi { get; set; }
+        public string Email { get; set; }
+        public string Anh { get; set; }
         public Guid IdGuiBC { get; set; }
         public string Sdt { get; set; }
        

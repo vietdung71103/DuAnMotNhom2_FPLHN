@@ -55,7 +55,7 @@
             this.label12 = new System.Windows.Forms.Label();
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.cbb_sach = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.comboBox5 = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -147,7 +147,7 @@
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.textBox6);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.comboBox6);
+            this.groupBox1.Controls.Add(this.cbb_sach);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.comboBox5);
             this.groupBox1.Controls.Add(this.label10);
@@ -354,13 +354,13 @@
             this.label7.TabIndex = 22;
             this.label7.Text = "Giá nhập:";
             // 
-            // comboBox6
+            // cbb_sach
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(177, 220);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(158, 31);
-            this.comboBox6.TabIndex = 21;
+            this.cbb_sach.FormattingEnabled = true;
+            this.cbb_sach.Location = new System.Drawing.Point(177, 220);
+            this.cbb_sach.Name = "cbb_sach";
+            this.cbb_sach.Size = new System.Drawing.Size(158, 31);
+            this.cbb_sach.TabIndex = 21;
             // 
             // label11
             // 
@@ -626,7 +626,7 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox textBox6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBox6;
+        private System.Windows.Forms.ComboBox cbb_sach;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBox5;
         private System.Windows.Forms.Label label10;

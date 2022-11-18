@@ -21,6 +21,7 @@ namespace _1.DAL.Context
         public DbSet<GioHang> GioHangs { get; set; }
         public DbSet<GioHangChiTiet> GioHangChiTiets { get; set; }
         public DbSet<HoaDon> HoaDons { get; set; }
+        public DbSet<Anh> Anhs { get; set; }
         public DbSet<HoaDonChiTiet> HoaDonChiTiets { get; set; }
         public DbSet<KhachHang> KhachHangs { get; set; }
         public DbSet<NhanVien> NhanViens { get; set; }
@@ -46,7 +47,7 @@ namespace _1.DAL.Context
         //    // Phương thức này sẽ áp dụng tất cả các config hiện có
         //}
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-           optionsBuilder.UseSqlServer("Data Source=LAPTOP-CUA-DUYY\\SQLEXPRESS;Initial Catalog=DbDuAn1_Nhom6_FPLHN;" + "Persist Security Info=True;User ID=duan1;Password=123");
+           optionsBuilder.UseSqlServer("Data Source=LAPTOP-CUA-DUYY\\SQLEXPRESS;Initial Catalog=DatabaseDuAn1_Nhom6_FPLHN;" + "Persist Security Info=True;User ID=duan1;Password=123");
         
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
