@@ -16,6 +16,7 @@ namespace _1.DAL.Models
         public string DiaChi { get; set; }
         public string Email { get; set; }
         public string Anh { get; set; }
+        public string Password { get; set; }
         public Guid IdGuiBC { get; set; }
         public string Sdt { get; set; }
        

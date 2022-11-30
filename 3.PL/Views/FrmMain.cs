@@ -1,8 +1,12 @@
-﻿using System;
+﻿using _1.DAL.Models;
+using _2.BUS.IServices;
+using _2.BUS.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +19,14 @@ namespace _3.PL.Views
         public FrmMain()
         {
             InitializeComponent();
+            _iql = new QLNhanVienServices();
+            _iqlCV = new QLChucVuServices();
+            //var nv = _iql.GetListNV().Where(c => c.Email == Properties.Settings1.Default.userlogined);
         }
         private Form activeForm;
+        private Login hello;
+        IQLNhanVienServices _iql;
+        IQLChucVuServices _iqlCV;
         private void label2_Click(object sender, EventArgs e)
         {
 
@@ -59,48 +69,118 @@ namespace _3.PL.Views
         {
             FrmQLBanHang frm = new FrmQLBanHang();
             ChangeForm(frm);
-           
+            groupBox1.Visible = false;
         }
 
         private void btn_dangxuat_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            Login frm = new Login();
+                frm.ShowDialog();
             this.Close();
         }
 
         private void btn_nhanvien_Click(object sender, EventArgs e)
         {
-            FrmQLNhanVien frm = new FrmQLNhanVien();
+            var cv = _iql.GetAll().Where(c => c.NhanViens.Email == Properties.Settings1.Default.userlogined).Select(c => c.ChucVus.Ten).FirstOrDefault();
+            if (cv == "Quản lý")
+            {
+                FrmQLNhanVien frm = new FrmQLNhanVien();
             ChangeForm(frm);
+                groupBox1.Visible = false;
+            }
+            else if(cv != "Quản lý")
+            {
+                MessageBox.Show("Nhân viên cùi làm gì có quyền này");
+            
+            }
         }
 
         private void btn_sach_Click(object sender, EventArgs e)
         {
             FrmQLSanPham frm = new FrmQLSanPham();
             ChangeForm(frm);
+            groupBox1.Visible = false;
         }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
             FrmDoiMatKhau frm = new FrmDoiMatKhau();
             ChangeForm(frm);
+            groupBox1.Visible = false;
         }
 
         private void btn_hoadon_Click(object sender, EventArgs e)
         {
             FrmHoaDon frm = new FrmHoaDon();
             ChangeForm(frm);
+            groupBox1.Visible = false;
         }
 
         private void btn_khachhang_Click(object sender, EventArgs e)
         {
             FrmQLKhachHang frm = new FrmQLKhachHang();
             ChangeForm(frm);
+            groupBox1.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
+          
+            this.Hide(); 
             FrmMain frm = new FrmMain();
-            ChangeForm(frm);
+            frm.ShowDialog();
+            this.Close();
+            //this.Hide();
+             //groupBox1.Visible = false;
+        }
+
+        //private void pcb_avt_Click(object sender, EventArgs e)
+        //{
+        //    var nvc = _iql.GetListNV().Where(c => c.Email == Properties.Settings1.Default.userlogined).FirstOrDefault();
+        //    lb_mnv.Text = nvc.Ma;
+        //    lb_tnv.Text = nvc.Ten;
+        //    lb_gt.Text = nvc.GioiTinh;
+        //    string formattedDate = nvc.NgaySinh.ToString("dd-MM-yyyy");
+        //    lb_ngaysinh.Text = Convert.ToString(formattedDate);
+        //    lb_email.Text = nvc.Email;
+        //    lb_sdt.Text = nvc.Sdt;
+        //    lb_diachi.Text = nvc.DiaChi;
+        //    lb_tt.Text = nvc.TrangThai;
+        //}
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            var layemail = Properties.Settings1.Default.userlogined;
+            var nv = _iql.GetListNV().Where(c => c.Email == layemail).FirstOrDefault();
+            if(nv.Anh != null)
+            {
+                string linkanh = nv.Anh.Replace(@"\", @"/");
+                if (File.Exists(linkanh))
+                {
+                    pcb_avt.Image = Image.FromFile(linkanh);
+                    pcb_avt.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
+             //   var cv = _iqlCV.GetListChucVu().FirstOrDefault(c => c.Id == nv.IdChucVu);
+                lb_name.Text = "Xin chào " + nv.Ten;
+                
+            }
+        }
+
+        private void pcb_avt_Click_1(object sender, EventArgs e)
+        {
+            var nvc = _iql.GetAll().Where(c => c.NhanViens.Email == Properties.Settings1.Default.userlogined).FirstOrDefault();
+            lb_mnv.Text = nvc.NhanViens.Ma;
+            lb_tnv.Text = nvc.NhanViens.Ten;
+            lb_gt.Text = nvc.NhanViens.GioiTinh;
+            string formattedDate = nvc.NhanViens.NgaySinh.ToString("dd-MM-yyyy");
+            lb_ngaysinh.Text = Convert.ToString(formattedDate);
+            lb_email.Text = nvc.NhanViens.Email;
+            lb_sdt.Text = nvc.NhanViens.Sdt;
+            lb_diachi.Text = nvc.NhanViens.DiaChi;
+            lb_tt.Text = nvc.NhanViens.TrangThai;
+            lb_cv.Text = nvc.ChucVus.Ten;
         }
     }
 }

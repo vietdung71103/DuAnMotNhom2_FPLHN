@@ -21,6 +21,7 @@ namespace _1.DAL.Confirguration
             builder.Property(c => c.GioiTinh).HasColumnType("nvarchar(20)").IsRequired();
             builder.Property(c => c.DiaChi).HasColumnType("nvarchar(200)").IsRequired();
             builder.Property(c => c.Email).HasColumnType("nvarchar(200)").IsRequired();
+            builder.Property(c => c.Password).HasColumnType("varchar(16)").IsRequired();
             builder.Property(c => c.Anh).HasColumnName("AnhNhanVien").HasColumnType("nvarchar(200)").IsRequired();
             builder.Property(c => c.IdGuiBC);
             builder.Property(c => c.Sdt).HasColumnType("nvarchar(12)").IsRequired();

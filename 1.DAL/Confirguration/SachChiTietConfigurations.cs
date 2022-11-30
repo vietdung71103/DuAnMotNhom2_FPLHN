@@ -20,7 +20,7 @@ namespace _1.DAL.Confirguration
             builder.Property(c => c.IdTacGia).IsRequired();
             builder.Property(c => c.IdTheLoai).IsRequired();
             builder.Property(c => c.IdNXB).IsRequired();
-            builder.Property(c => c.IdAnh).IsRequired();
+            builder.Property(c => c.Anh).HasColumnName("DuongDanAnh").HasColumnType("nvarchar(200)");
             builder.Property(c => c.MoTa).HasColumnType("nvarchar(200)");
             
             builder.Property(c => c.GiaBan).HasColumnType("decimal").IsRequired();
@@ -28,7 +28,7 @@ namespace _1.DAL.Confirguration
             builder.Property(c => c.SoLuongTon).HasColumnType("int").IsRequired();
 
             builder.HasOne(c => c.Sach).WithMany().HasForeignKey(c => c.IdSach).IsRequired();
-            builder.HasOne(c => c.Anh).WithMany().HasForeignKey(c => c.IdAnh).IsRequired();
+          //  builder.HasOne(c => c.Anh).WithMany().HasForeignKey(c => c.IdAnh);
             builder.HasOne(c => c.TacGia).WithMany().HasForeignKey(c => c.IdTacGia).IsRequired();
             builder.HasOne(c => c.TheLoai).WithMany().HasForeignKey(c => c.IdTheLoai).IsRequired();
             builder.HasOne(c => c.NXB).WithMany().HasForeignKey(c => c.IdNXB).IsRequired();

@@ -1,5 +1,6 @@
 ﻿using _1.DAL.Context;
 using _1.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,7 +36,7 @@ namespace _1.DAL.IRepositories
 
         public List<SachChiTiet> GetListSachChiTiet()
         {
-            _lst = _dbContext.SachChiTiets.ToList();
+            _lst = _dbContext.SachChiTiets.AsNoTracking().ToList();
             return _lst;
         }
 

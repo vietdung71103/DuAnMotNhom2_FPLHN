@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using _1.DAL.Context;
 
 namespace _1.DAL.Migrations
 {
     [DbContext(typeof(Db2Context))]
-    partial class Db2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221123142050_loncxc")]
+    partial class loncxc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -259,10 +261,6 @@ namespace _1.DAL.Migrations
                     b.Property<DateTime>("NgaySinh")
                         .HasColumnType("datetime");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(16)");
-
                     b.Property<string>("Sdt")
                         .IsRequired()
                         .HasColumnType("nvarchar(12)");
@@ -307,15 +305,14 @@ namespace _1.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Anh")
-                        .HasColumnType("nvarchar(200)")
-                        .HasColumnName("DuongDanAnh");
-
                     b.Property<decimal>("GiaBan")
                         .HasColumnType("decimal");
 
                     b.Property<decimal>("GiaNhap")
                         .HasColumnType("decimal");
+
+                    b.Property<Guid>("IdAnh")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("IdNXB")
                         .HasColumnType("uniqueidentifier");
@@ -329,9 +326,6 @@ namespace _1.DAL.Migrations
                     b.Property<Guid>("IdTheLoai")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Ma")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MoTa")
                         .HasColumnType("nvarchar(200)");
 
@@ -342,6 +336,8 @@ namespace _1.DAL.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IdAnh");
 
                     b.HasIndex("IdNXB");
 
@@ -473,6 +469,12 @@ namespace _1.DAL.Migrations
 
             modelBuilder.Entity("_1.DAL.Models.SachChiTiet", b =>
                 {
+                    b.HasOne("_1.DAL.Models.Anh", "Anh")
+                        .WithMany()
+                        .HasForeignKey("IdAnh")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("_1.DAL.Models.NXB", "NXB")
                         .WithMany()
                         .HasForeignKey("IdNXB")
@@ -496,6 +498,8 @@ namespace _1.DAL.Migrations
                         .HasForeignKey("IdTheLoai")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Anh");
 
                     b.Navigation("NXB");
 

@@ -25,7 +25,7 @@ namespace _2.BUS.Services
 
         public string Add(NhanVien obj)
         {
-            _lst.Add(obj);
+           // _lst.Add(obj);
             _rps.Add(obj);
             return "Thêm thành công";
         }
@@ -50,7 +50,8 @@ namespace _2.BUS.Services
 
         public List<NhanVien> GetListNV()
         {
-            throw new NotImplementedException();
+            _lst = _rps.GetListNhanVien();
+            return _lst;
         }
 
         public string Update(NhanVien obj)

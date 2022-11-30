@@ -49,15 +49,38 @@ namespace _3.PL.Views
         {
             this.Close();
         }
-
+        private string VietHoaChuDau(string text)
+        {
+            var temp = text.ToLower();
+            return temp.Substring(0, 1).ToUpper() + temp.Substring(1, temp.Length - 1);
+        }
+        private string MaSanPham(string ten)
+        {
+            string[] arrTen = ten.Split(' ');
+            string ma = "SP_"; //VietHoaChuDau(arrTen[arrTen.Length - 1]);
+            for (int i = 0; i < arrTen.Length; i++)
+            {
+                ma += VietHoaChuDau(arrTen[i]).Substring(0, 1);
+            }
+            Random rand = new Random();
+            int z = rand.Next(1000, 9999);
+            var so = z.ToString();
+            return ma + so;
+        }
         private void btn_them_Click(object sender, EventArgs e)
         {
+            int ma = _services.GetListNXB().Count + 1;
+            if(tbt_ten.Text == "")
+            {
+                MessageBox.Show("Chưa nhập tên");
+                return;
+            }
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn thêm ?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 MessageBox.Show(_services.Add(new NXB()
                 {
-                    Ma = tbt_ma.Text,
+                    Ma = "MNXB0" +ma,
                     Ten = tbt_ten.Text
                 }));
                 ResetForm();
@@ -71,7 +94,10 @@ namespace _3.PL.Views
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-
+            if (tbt_ten.Text == "")
+            {
+                MessageBox.Show("Chưa nhập tên");
+            }
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn sửa ?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
@@ -95,6 +121,10 @@ namespace _3.PL.Views
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
+            if (tbt_ten.Text == "")
+            {
+                MessageBox.Show("Chưa nhập tên");
+            }
             var xoa = _services.GetListNXB().Where(c => c.Id == _getID).FirstOrDefault();
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xoá ?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)

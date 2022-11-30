@@ -55,12 +55,18 @@ namespace _3.PL.Views
 
         private void btn_them_Click(object sender, EventArgs e)
         {
+            if(txt_tensach.Text == "")
+            {
+                MessageBox.Show("Chưa nhập tên");
+                return;
+            }
+            int ma = _services.GetListSach().Count + 1;
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn thêm ?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
                 MessageBox.Show(_services.Add(new Sach()
                 {
-                    Ma = txt_masach.Text,
+                    Ma ="MS0" + ma ,
                     Ten = txt_tensach.Text
                 }));
                 ResetForm();

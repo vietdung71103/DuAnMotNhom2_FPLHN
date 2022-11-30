@@ -1,4 +1,5 @@
-﻿using _1.DAL.Models;
+﻿using _1.DAL.IRepositories;
+using _1.DAL.Models;
 using _2.BUS.IServices;
 using System;
 using System.Collections.Generic;
@@ -10,12 +11,12 @@ namespace _2.BUS.Services
 {
     public class QLTheLoaiServices:IQLTheLoaiServices
     {
-        IQLTheLoaiServices _rps;
+        ITheLoaiRepositories _rps;
         List<TheLoai> _lst;
         public QLTheLoaiServices()
         {
             _lst = new List<TheLoai>();
-            _rps = new QLTheLoaiServices();
+            _rps = new TheLoaiRepositories();
         }
 
         public string Add(TheLoai obj)

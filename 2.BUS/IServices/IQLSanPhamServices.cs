@@ -10,9 +10,9 @@ namespace _2.BUS.IServices
 {
     public interface IQLSanPhamServices
     {
-        string Add(SanPhamView obj);
-        string Update(SanPhamView obj);
-        string Delete(SanPhamView obj);
+        string Add(SachChiTiet obj);
+        string Update(SachChiTiet obj);
+        string Delete(SachChiTiet obj);
         List<SanPhamView> GetAll();
         List<SachChiTiet> GetListSachChiTiet();
     }

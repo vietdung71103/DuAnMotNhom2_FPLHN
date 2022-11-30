@@ -30,14 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbt_email = new System.Windows.Forms.TextBox();
+            this.tbt_password = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.button1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cb_forget = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,24 +50,26 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // textBox1
+            // tbt_email
             // 
-            this.textBox1.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox1.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.textBox1.Location = new System.Drawing.Point(85, 218);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(290, 36);
-            this.textBox1.TabIndex = 1;
+            this.tbt_email.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbt_email.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbt_email.Location = new System.Drawing.Point(85, 218);
+            this.tbt_email.Name = "tbt_email";
+            this.tbt_email.Size = new System.Drawing.Size(290, 36);
+            this.tbt_email.TabIndex = 1;
+            this.tbt_email.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbt_email_MouseDoubleClick);
             // 
-            // textBox2
+            // tbt_password
             // 
-            this.textBox2.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.ForeColor = System.Drawing.SystemColors.WindowFrame;
-            this.textBox2.Location = new System.Drawing.Point(85, 292);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PasswordChar = '*';
-            this.textBox2.Size = new System.Drawing.Size(290, 36);
-            this.textBox2.TabIndex = 2;
+            this.tbt_password.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbt_password.ForeColor = System.Drawing.SystemColors.WindowFrame;
+            this.tbt_password.Location = new System.Drawing.Point(85, 292);
+            this.tbt_password.Name = "tbt_password";
+            this.tbt_password.PasswordChar = '*';
+            this.tbt_password.Size = new System.Drawing.Size(290, 36);
+            this.tbt_password.TabIndex = 2;
+            this.tbt_password.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbt_password_MouseDoubleClick);
             // 
             // linkLabel1
             // 
@@ -125,17 +127,18 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Mật khẩu:";
             // 
-            // checkBox1
+            // cb_forget
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.checkBox1.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.checkBox1.Location = new System.Drawing.Point(85, 334);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(107, 22);
-            this.checkBox1.TabIndex = 8;
-            this.checkBox1.Text = "Nhớ tài khoản";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cb_forget.AutoSize = true;
+            this.cb_forget.Font = new System.Drawing.Font("Bahnschrift SemiCondensed", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.cb_forget.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.cb_forget.Location = new System.Drawing.Point(85, 334);
+            this.cb_forget.Name = "cb_forget";
+            this.cb_forget.Size = new System.Drawing.Size(107, 22);
+            this.cb_forget.TabIndex = 8;
+            this.cb_forget.Text = "Nhớ tài khoản";
+            this.cb_forget.UseVisualStyleBackColor = true;
+            this.cb_forget.Click += new System.EventHandler(this.cb_forget_Click);
             // 
             // Login
             // 
@@ -144,14 +147,14 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(426, 528);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.cb_forget);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.linkLabel2);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbt_password);
+            this.Controls.Add(this.tbt_email);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Login";
@@ -166,13 +169,13 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbt_email;
+        private System.Windows.Forms.TextBox tbt_password;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cb_forget;
     }
 }
