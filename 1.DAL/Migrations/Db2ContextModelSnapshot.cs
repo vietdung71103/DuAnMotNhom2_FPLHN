@@ -116,6 +116,9 @@ namespace _1.DAL.Migrations
                     b.Property<decimal>("DonGia")
                         .HasColumnType("decimal");
 
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<Guid>("IdKhachHang")
                         .HasColumnType("uniqueidentifier");
 
@@ -333,7 +336,7 @@ namespace _1.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MoTa")
-                        .HasColumnType("nvarchar(200)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int>("SoLuongTon")
                         .HasColumnType("int");

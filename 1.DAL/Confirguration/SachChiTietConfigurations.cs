@@ -21,7 +21,7 @@ namespace _1.DAL.Confirguration
             builder.Property(c => c.IdTheLoai).IsRequired();
             builder.Property(c => c.IdNXB).IsRequired();
             builder.Property(c => c.Anh).HasColumnName("DuongDanAnh").HasColumnType("nvarchar(200)");
-            builder.Property(c => c.MoTa).HasColumnType("nvarchar(200)");
+            builder.Property(c => c.MoTa).HasColumnType("nvarchar(500)");
             
             builder.Property(c => c.GiaBan).HasColumnType("decimal").IsRequired();
             builder.Property(c => c.GiaNhap).HasColumnType("decimal").IsRequired();

@@ -16,6 +16,7 @@ namespace _3.PL.Views
 {
     public partial class FrmMain : Form
     {
+        string AnhURL = "";
         public FrmMain()
         {
             InitializeComponent();
@@ -74,10 +75,19 @@ namespace _3.PL.Views
 
         private void btn_dangxuat_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Thông báo", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                this.Hide();
             Login frm = new Login();
                 frm.ShowDialog();
             this.Close();
+            }
+
+            if(result == DialogResult.No)
+            {
+                return;
+            }
         }
 
         private void btn_nhanvien_Click(object sender, EventArgs e)
@@ -181,6 +191,45 @@ namespace _3.PL.Views
             lb_diachi.Text = nvc.NhanViens.DiaChi;
             lb_tt.Text = nvc.NhanViens.TrangThai;
             lb_cv.Text = nvc.ChucVus.Ten;
+        }
+
+        private void btn_upanh_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            if (op.ShowDialog() == DialogResult.OK)
+            {
+                AnhURL = op.FileName;
+            
+
+                var doi = _iql.GetListNV().Where(c => c.Email == Properties.Settings1.Default.userlogined).FirstOrDefault();
+
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đổi ảnh đại diện?", "Thông báo", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Yes)
+                {
+                    foreach (var item in _iql.GetListNV().Where(c => c.Email == Properties.Settings1.Default.userlogined))
+                    {
+                        //string projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                        //File.Copy(AnhURL, Path.Combine(projectDirectory, "Image", "NhanVien", Path.GetFileName(AnhURL)), true);
+                        //AnhURL = Path.Combine(projectDirectory, "Image", "NhanVien", Path.GetFileName(AnhURL));
+                        item.Anh = AnhURL;
+                        _iql.Update(item);
+                        pcb_avt.Image = Image.FromFile(op.FileName);
+                        pcb_avt.SizeMode = PictureBoxSizeMode.StretchImage;
+                        MessageBox.Show("Đổi ảnh đại diện thành công");
+                    }
+                }
+                else
+                {
+                   
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+            
+            
         }
     }
 }

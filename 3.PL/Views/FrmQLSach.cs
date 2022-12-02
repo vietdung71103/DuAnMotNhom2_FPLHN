@@ -143,5 +143,7 @@ namespace _3.PL.Views
             txt_masach.Text = Convert.ToString(dtg_show.Rows[rd].Cells[2].Value);
             txt_tensach.Text = Convert.ToString(dtg_show.Rows[rd].Cells[3].Value);
         }
+
+        
     }
 }

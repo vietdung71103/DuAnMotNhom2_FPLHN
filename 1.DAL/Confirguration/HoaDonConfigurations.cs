@@ -20,6 +20,7 @@ namespace _1.DAL.Confirguration
             builder.Property(t => t.MaHoaDon).HasColumnType("varchar(20)").IsRequired();
             builder.Property(t => t.NgayTao).HasColumnType("Datetime").IsRequired();
             builder.Property(t => t.TrangThai).HasColumnType("nvarchar(100)").IsRequired();
+            builder.Property(t => t.GhiChu).HasColumnType("nvarchar(500)");
             builder.Property(t => t.DonGia).HasColumnType("decimal").IsRequired();
 
 

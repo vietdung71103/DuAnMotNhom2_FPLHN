@@ -35,8 +35,9 @@ namespace _3.PL.Views
             _iQLNXB = new QLNXBServices();
             _iQLTG = new QLTacGiaServices();
             _iqSP = new QLSanPhamServices();
-            LoadCBB();
+            //LoadCBB();
             LoadData();
+           
         }
         void LoadData() {
             dtg_show.ColumnCount = 12;
@@ -188,12 +189,12 @@ namespace _3.PL.Views
             //dtg_show.Columns[9].Name = "Giá bán";
             //dtg_show.Columns[10].Name = "Số lượng tồn";
             //dtg_show.Columns[11].Name = "Số trang";
-            var checkma = _iqSP.GetAll().Where(c => c.SachChiTiets.Ma == tbt_ma.Text);
-            if (checkma != null)
-            {
-                MessageBox.Show("Mã không được phép trùng");
-                return;
-            }
+            var checkma = _iqSP.GetAll().Where(c => c.SachChiTiets.Ma == tbt_ma.Text).Count();
+            //if (checkma != null)
+            //{
+            //    MessageBox.Show("Mã không được phép trùng");
+            //    return;
+            //}
             if (cbb_sach.Text == "")
             {
                 MessageBox.Show("Chưa chọn sách");
@@ -531,6 +532,11 @@ namespace _3.PL.Views
         private void btn_loc_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void FrmQLSanPham_Load(object sender, EventArgs e)
+        {
+            LoadCBB();
         }
 
 

@@ -626,6 +626,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmQLSanPham";
             this.Text = "FrmQLSanPham";
+            this.Load += new System.EventHandler(this.FrmQLSanPham_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panelhome.ResumeLayout(false);

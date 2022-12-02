@@ -105,5 +105,16 @@ namespace _3.PL.Views
         {
 
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FrmQuenMatKhau frm = new FrmQuenMatKhau();
+            frm.ShowDialog();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

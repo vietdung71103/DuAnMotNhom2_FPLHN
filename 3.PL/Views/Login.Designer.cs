@@ -58,7 +58,6 @@
             this.tbt_email.Name = "tbt_email";
             this.tbt_email.Size = new System.Drawing.Size(290, 36);
             this.tbt_email.TabIndex = 1;
-            this.tbt_email.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbt_email_MouseDoubleClick);
             // 
             // tbt_password
             // 
@@ -69,7 +68,6 @@
             this.tbt_password.PasswordChar = '*';
             this.tbt_password.Size = new System.Drawing.Size(290, 36);
             this.tbt_password.TabIndex = 2;
-            this.tbt_password.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tbt_password_MouseDoubleClick);
             // 
             // linkLabel1
             // 
@@ -82,6 +80,7 @@
             this.linkLabel1.TabIndex = 3;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Bạn quên mật khẩu? ";
+            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // linkLabel2
             // 
@@ -160,6 +159,7 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Đăng Nhập";
+            this.Load += new System.EventHandler(this.Login_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

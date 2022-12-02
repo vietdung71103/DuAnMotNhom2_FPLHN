@@ -87,12 +87,12 @@ namespace _3.PL.Views
         }
         private void btn_them_Click(object sender, EventArgs e)
         {
-            var ma = _iql.GetListKhachHang().Where(c => c.Ma == tbt_makh.Text);
-            if(ma != null)
-            {
-                MessageBox.Show("Mã không được phép trùng");
-                return;
-            }
+            //var ma = _iql.GetListKhachHang().Where(c => c.Ma == tbt_makh.Text);
+            //if(ma != null)
+            //{
+            //    MessageBox.Show("Mã không được phép trùng");
+            //    return;
+            //}
             if (tbt_tenkh.Text.Length == 0)
             {
                 MessageBox.Show("Bạn chưa nhập tên khách hàng");
@@ -100,7 +100,7 @@ namespace _3.PL.Views
             }
             if (tbt_tenkh.Text.Length < 8)
             {
-                MessageBox.Show("Tên nhân viên phải có ít nhất 8 kí tự");
+                MessageBox.Show("Tên khách hàng phải có ít nhất 8 kí tự");
                 return;
             }
             if (tbt_sdt.Text.Length < 10)
