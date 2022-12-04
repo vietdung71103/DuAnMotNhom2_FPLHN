@@ -145,6 +145,7 @@
             this.btn_thongbao.TabIndex = 7;
             this.btn_thongbao.Text = "Báo cáo,Thống kê";
             this.btn_thongbao.UseVisualStyleBackColor = true;
+            this.btn_thongbao.Click += new System.EventHandler(this.btn_thongbao_Click);
             // 
             // btn_nhanvien
             // 
@@ -515,7 +516,7 @@
             this.Controls.Add(this.pnl_menu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmMain";
-            this.Text = "Được 10 điểm tự cắt dái";
+            this.Text = "Quản lý cửa hàng bán sách";
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.pnl_menu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

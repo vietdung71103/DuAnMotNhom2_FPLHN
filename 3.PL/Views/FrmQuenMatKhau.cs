@@ -16,5 +16,10 @@ namespace _3.PL.Views
         {
             InitializeComponent();
         }
+
+        private void btn_xacnhan_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

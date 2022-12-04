@@ -496,6 +496,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label5.Location = new System.Drawing.Point(403, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(68, 23);

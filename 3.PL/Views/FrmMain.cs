@@ -231,5 +231,12 @@ namespace _3.PL.Views
             
             
         }
+
+        private void btn_thongbao_Click(object sender, EventArgs e)
+        {
+            FrmQLThongKe frm = new FrmQLThongKe();
+            ChangeForm(frm);
+            groupBox1.Visible = false;
+        }
     }
 }

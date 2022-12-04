@@ -109,9 +109,10 @@ namespace _3.PL.Views
                 
                 tbt_sl.Text = Convert.ToString(r.Cells[6].Value);
                 tbt_dongia.Text = Convert.ToString(r.Cells[7].Value);
-                lb_total.Text = (Convert.ToDecimal(tbt_dongia.Text) * Convert.ToInt32(tbt_sl.Text)).ToString();
+               
             }
-            
+            lb_total.Text = (Convert.ToDecimal(tbt_dongia.Text) * Convert.ToInt32(tbt_sl.Text)).ToString();
+
         }
 
         private void dtg_hd_CellClick(object sender, DataGridViewCellEventArgs e)
