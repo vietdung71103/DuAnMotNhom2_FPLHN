@@ -10,8 +10,15 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.IO;
 using System.Threading.Tasks;
+using AForge.Video;
+using AForge.Video.DirectShow;
 using System.Windows.Forms;
+using ZXing;
+
+
+
 
 namespace _3.PL.Views
 {
@@ -26,11 +33,13 @@ namespace _3.PL.Views
         Guid _idKH;
         Guid _idNV;
         Guid _idHD;
-
+        
         HoaDonChiTiet _giohang;
         public KhachHang _khachHang;
         List<ViewHoaDonChiTiet> _lstVHDCT;
         List<ViewHoaDon> _lstVHD;
+        FilterInfoCollection _filterInfoCollection;
+        VideoCaptureDevice _captureDevice;
         public FrmQLBanHang()
         {
             InitializeComponent();
@@ -42,6 +51,7 @@ namespace _3.PL.Views
             _khachHang = new KhachHang();
             _giohang = new HoaDonChiTiet();
             _lstVHD = new List<ViewHoaDon>();
+          
             _lstVHDCT = new List<ViewHoaDonChiTiet>();
             var nv = _iqlNV.GetListNV().FirstOrDefault(c=>c.Email == Properties.Settings1.Default.userlogined);
             lb_mnv.Text = nv.Ma;
@@ -513,6 +523,95 @@ namespace _3.PL.Views
                     x.TheLoais.Ten, x.NXBs.Ten/*, x.Anhs.Ten*/, x.SachChiTiets.MoTa,
                     x.SachChiTiets.GiaNhap, x.SachChiTiets.GiaBan,
                     x.SachChiTiets.SoLuongTon, x.SachChiTiets.SoTrang);
+            }
+        }
+
+        private void FrmQLBanHang_Load(object sender, EventArgs e)
+        {
+            _filterInfoCollection = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo filterInfo in _filterInfoCollection)
+            {
+                cbb_camera.Items.Add(filterInfo.Name);
+                cbb_camera.SelectedIndex = 0;
+            }
+        }
+
+        private void btn_quetma_Click(object sender, EventArgs e)
+        {
+            _captureDevice = new VideoCaptureDevice(_filterInfoCollection[cbb_camera.SelectedIndex].MonikerString);
+            _captureDevice.NewFrame += CaptureDevice_NewFrame;
+            _captureDevice.Start();
+            timer1.Start();
+
+        }
+
+        private void CaptureDevice_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            pcb_qr.Image = (Bitmap)eventArgs.Frame.Clone();
+        }
+
+        private void FrmQLBanHang_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            if (_captureDevice.IsRunning)
+            {
+             // _captureDevice.Stop();
+               
+            }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (pcb_qr.Image != null)
+            {
+                BarcodeReader barcodeReader = new ZXing.BarcodeReader();
+                Result result = barcodeReader.Decode((Bitmap)pcb_qr.Image);
+                if (result !=null)
+                {
+                    tbt_qr.Text = result.ToString();
+                    if (_captureDevice.IsRunning)
+                    {
+                      //  _captureDevice.Stop();
+                    }
+                }
+            }
+        }
+        
+        private void tbt_qr_TextChanged(object sender, EventArgs e)
+        {
+            var sp = _iqlSP.GetAll().FirstOrDefault(c => Convert.ToString(c.SachChiTiets.Id) ==tbt_qr.Text);
+            if(sp == null)
+            {
+                //MessageBox.Show("QR không tồn tại");
+            }
+            else
+            {
+                var data = _lstVHDCT.FirstOrDefault(c => c.IdSachChiTiet == sp.SachChiTiets.Id);
+                if(data == null)
+                {
+                    ViewHoaDonChiTiet _hdct = new ViewHoaDonChiTiet();
+                    _hdct.Id = _giohang.Id;
+                    _hdct.IdSachChiTiet = sp.SachChiTiets.Id;
+                    _hdct.MaSach = sp.Sachs.Ma;
+                    _hdct.TenSach = sp.Sachs.Ten;
+                    _hdct.SoLuong = 1;
+                    _hdct.GiaBan = sp.SachChiTiets.GiaBan;
+                    _lstVHDCT.Add(_hdct);
+                }
+                
+                 else
+                {
+                    if (data.SoLuong == sp.SachChiTiets.SoLuongTon)
+                    {
+                        MessageBox.Show("Sản phẩm trong giỏ hàng đã vượt quá số lượng cho phép");
+                    }
+                    else
+                    {
+                        data.SoLuong++;
+                    }
+                }
+                LoadGioHang();
+                tbt_qr.Text = "";
             }
         }
     }

@@ -53,7 +53,7 @@ namespace _3.PL.Views
             dtg_hd.Columns[7].Name = "Đơn giá";
             dtg_hd.Columns[8].Name = "Trạng thái";
            
-            foreach (var x in _iqlHD.GetListViewHoaDon())
+            foreach (var x in _iqlHD.GetListViewHoaDon()/*.Where(c=>c.Id == _idHD)*/)
             {
                 dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, x.TenNhanVien, x.TenKhachHang, x.NgayTao, x.GhiChu,x.TongTien, x.TrangThai);
             }

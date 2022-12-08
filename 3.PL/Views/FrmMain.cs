@@ -101,7 +101,7 @@ namespace _3.PL.Views
             }
             else if(cv != "Quản lý")
             {
-                MessageBox.Show("Nhân viên cùi làm gì có quyền này");
+                MessageBox.Show("Chức vụ của bạn không thể sử dụng chức năng này");
             
             }
         }

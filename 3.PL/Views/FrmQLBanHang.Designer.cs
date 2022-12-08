@@ -28,8 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQLBanHang));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbt_qr = new System.Windows.Forms.TextBox();
+            this.btn_quetma = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbb_camera = new System.Windows.Forms.ComboBox();
+            this.pcb_qr = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cbb_khachhang = new System.Windows.Forms.ComboBox();
             this.lb_total = new System.Windows.Forms.Label();
@@ -70,7 +76,9 @@
             this.lb_tennvbanhang = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.lb_mnv = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_giohang)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +91,11 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.tbt_qr);
+            this.groupBox1.Controls.Add(this.btn_quetma);
+            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.cbb_camera);
+            this.groupBox1.Controls.Add(this.pcb_qr);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.cbb_khachhang);
             this.groupBox1.Controls.Add(this.lb_total);
@@ -98,16 +111,66 @@
             this.groupBox1.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox1.Location = new System.Drawing.Point(1, 81);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(819, 329);
+            this.groupBox1.Size = new System.Drawing.Size(853, 391);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Giỏ Hàng";
+            // 
+            // tbt_qr
+            // 
+            this.tbt_qr.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbt_qr.Location = new System.Drawing.Point(511, 89);
+            this.tbt_qr.Name = "tbt_qr";
+            this.tbt_qr.Size = new System.Drawing.Size(90, 30);
+            this.tbt_qr.TabIndex = 28;
+            this.tbt_qr.TextChanged += new System.EventHandler(this.tbt_qr_TextChanged);
+            // 
+            // btn_quetma
+            // 
+            this.btn_quetma.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_quetma.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_quetma.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.btn_quetma.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_quetma.Location = new System.Drawing.Point(511, 54);
+            this.btn_quetma.Name = "btn_quetma";
+            this.btn_quetma.Size = new System.Drawing.Size(90, 29);
+            this.btn_quetma.TabIndex = 33;
+            this.btn_quetma.Text = "Quét mã";
+            this.btn_quetma.UseVisualStyleBackColor = true;
+            this.btn_quetma.Click += new System.EventHandler(this.btn_quetma_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(452, 26);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(53, 17);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Camera:";
+            // 
+            // cbb_camera
+            // 
+            this.cbb_camera.FormattingEnabled = true;
+            this.cbb_camera.Location = new System.Drawing.Point(511, 17);
+            this.cbb_camera.Name = "cbb_camera";
+            this.cbb_camera.Size = new System.Drawing.Size(113, 31);
+            this.cbb_camera.TabIndex = 31;
+            // 
+            // pcb_qr
+            // 
+            this.pcb_qr.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pcb_qr.Location = new System.Drawing.Point(299, 17);
+            this.pcb_qr.Name = "pcb_qr";
+            this.pcb_qr.Size = new System.Drawing.Size(150, 150);
+            this.pcb_qr.TabIndex = 30;
+            this.pcb_qr.TabStop = false;
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(193, 102);
+            this.label11.Location = new System.Drawing.Point(149, 144);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 23);
             this.label11.TabIndex = 29;
@@ -116,9 +179,9 @@
             // cbb_khachhang
             // 
             this.cbb_khachhang.FormattingEnabled = true;
-            this.cbb_khachhang.Location = new System.Drawing.Point(482, 23);
+            this.cbb_khachhang.Location = new System.Drawing.Point(735, 17);
             this.cbb_khachhang.Name = "cbb_khachhang";
-            this.cbb_khachhang.Size = new System.Drawing.Size(121, 31);
+            this.cbb_khachhang.Size = new System.Drawing.Size(112, 31);
             this.cbb_khachhang.TabIndex = 12;
             this.cbb_khachhang.SelectedIndexChanged += new System.EventHandler(this.cbb_khachhang_SelectedIndexChanged);
             // 
@@ -126,7 +189,7 @@
             // 
             this.lb_total.AutoSize = true;
             this.lb_total.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_total.Location = new System.Drawing.Point(134, 102);
+            this.lb_total.Location = new System.Drawing.Point(93, 144);
             this.lb_total.Name = "lb_total";
             this.lb_total.Size = new System.Drawing.Size(34, 23);
             this.lb_total.TabIndex = 28;
@@ -136,7 +199,7 @@
             // 
             this.lb_sdt.AutoSize = true;
             this.lb_sdt.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_sdt.Location = new System.Drawing.Point(482, 108);
+            this.lb_sdt.Location = new System.Drawing.Point(733, 96);
             this.lb_sdt.Name = "lb_sdt";
             this.lb_sdt.Size = new System.Drawing.Size(38, 17);
             this.lb_sdt.TabIndex = 11;
@@ -146,7 +209,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label17.Location = new System.Drawing.Point(30, 102);
+            this.label17.Location = new System.Drawing.Point(16, 144);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(80, 23);
             this.label17.TabIndex = 27;
@@ -156,7 +219,7 @@
             // 
             this.lb_tenkh.AutoSize = true;
             this.lb_tenkh.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_tenkh.Location = new System.Drawing.Point(482, 72);
+            this.lb_tenkh.Location = new System.Drawing.Point(733, 60);
             this.lb_tenkh.Name = "lb_tenkh";
             this.lb_tenkh.Size = new System.Drawing.Size(38, 17);
             this.lb_tenkh.TabIndex = 10;
@@ -166,7 +229,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(379, 108);
+            this.label3.Location = new System.Drawing.Point(630, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(80, 17);
             this.label3.TabIndex = 9;
@@ -176,7 +239,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(379, 72);
+            this.label2.Location = new System.Drawing.Point(630, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 17);
             this.label2.TabIndex = 8;
@@ -186,7 +249,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(379, 32);
+            this.label1.Location = new System.Drawing.Point(634, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 17);
             this.label1.TabIndex = 6;
@@ -199,7 +262,7 @@
             this.tbt_xoagiohang.ForeColor = System.Drawing.SystemColors.Desktop;
             this.tbt_xoagiohang.Image = ((System.Drawing.Image)(resources.GetObject("tbt_xoagiohang.Image")));
             this.tbt_xoagiohang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tbt_xoagiohang.Location = new System.Drawing.Point(139, 29);
+            this.tbt_xoagiohang.Location = new System.Drawing.Point(149, 26);
             this.tbt_xoagiohang.Name = "tbt_xoagiohang";
             this.tbt_xoagiohang.Size = new System.Drawing.Size(124, 44);
             this.tbt_xoagiohang.TabIndex = 4;
@@ -215,7 +278,7 @@
             this.tbt_xoasp.ForeColor = System.Drawing.SystemColors.Desktop;
             this.tbt_xoasp.Image = ((System.Drawing.Image)(resources.GetObject("tbt_xoasp.Image")));
             this.tbt_xoasp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tbt_xoasp.Location = new System.Drawing.Point(6, 29);
+            this.tbt_xoasp.Location = new System.Drawing.Point(3, 26);
             this.tbt_xoasp.Name = "tbt_xoasp";
             this.tbt_xoasp.Size = new System.Drawing.Size(127, 44);
             this.tbt_xoasp.TabIndex = 3;
@@ -229,11 +292,11 @@
             this.dtg_giohang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtg_giohang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtg_giohang.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_giohang.Location = new System.Drawing.Point(3, 128);
+            this.dtg_giohang.Location = new System.Drawing.Point(3, 173);
             this.dtg_giohang.Name = "dtg_giohang";
             this.dtg_giohang.RowTemplate.Height = 25;
             this.dtg_giohang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_giohang.Size = new System.Drawing.Size(813, 198);
+            this.dtg_giohang.Size = new System.Drawing.Size(847, 215);
             this.dtg_giohang.TabIndex = 0;
             this.dtg_giohang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_giohang_CellClick);
             this.dtg_giohang.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_giohang_CellValueChanged);
@@ -244,9 +307,9 @@
             this.groupBox2.Controls.Add(this.dtg_sp);
             this.groupBox2.Controls.Add(this.tbt_timkiemsp);
             this.groupBox2.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(1, 416);
+            this.groupBox2.Location = new System.Drawing.Point(1, 478);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(822, 267);
+            this.groupBox2.Size = new System.Drawing.Size(850, 205);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sản phẩm";
@@ -265,11 +328,11 @@
             this.dtg_sp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtg_sp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtg_sp.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_sp.Location = new System.Drawing.Point(3, 80);
+            this.dtg_sp.Location = new System.Drawing.Point(3, 75);
             this.dtg_sp.Name = "dtg_sp";
             this.dtg_sp.RowTemplate.Height = 25;
             this.dtg_sp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_sp.Size = new System.Drawing.Size(816, 184);
+            this.dtg_sp.Size = new System.Drawing.Size(844, 127);
             this.dtg_sp.TabIndex = 2;
             this.dtg_sp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_sp_CellClick);
             // 
@@ -316,9 +379,9 @@
             this.groupBox3.Controls.Add(this.tbt_mahd);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox3.Location = new System.Drawing.Point(829, 234);
+            this.groupBox3.Location = new System.Drawing.Point(857, 234);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(493, 449);
+            this.groupBox3.Size = new System.Drawing.Size(465, 449);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thanh toán";
@@ -474,9 +537,9 @@
             // 
             this.groupBox4.Controls.Add(this.dtg_donhangcho);
             this.groupBox4.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox4.Location = new System.Drawing.Point(829, 7);
+            this.groupBox4.Location = new System.Drawing.Point(857, 7);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(493, 221);
+            this.groupBox4.Size = new System.Drawing.Size(465, 221);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Đơn hàng chờ";
@@ -490,7 +553,7 @@
             this.dtg_donhangcho.Name = "dtg_donhangcho";
             this.dtg_donhangcho.RowTemplate.Height = 25;
             this.dtg_donhangcho.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_donhangcho.Size = new System.Drawing.Size(487, 160);
+            this.dtg_donhangcho.Size = new System.Drawing.Size(459, 160);
             this.dtg_donhangcho.TabIndex = 0;
             this.dtg_donhangcho.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_donhangcho_CellClick);
             // 
@@ -544,6 +607,11 @@
             this.lb_mnv.TabIndex = 15;
             this.lb_mnv.Text = "......";
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FrmQLBanHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -563,8 +631,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmQLBanHang";
             this.Text = "FrmQLBanHang";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmQLBanHang_FormClosing);
+            this.Load += new System.EventHandler(this.FrmQLBanHang_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_giohang)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -623,5 +694,11 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label lb_tienthua;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btn_quetma;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbb_camera;
+        private System.Windows.Forms.PictureBox pcb_qr;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox tbt_qr;
     }
 }

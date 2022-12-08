@@ -12,7 +12,8 @@ using System.Windows.Forms;
 using _2.BUS.ViewModels;
 using _1.DAL.Models;
 using System.IO;
-
+using QRCoder;
+using BarcodeLib;
 namespace _3.PL.Views
 {
     public partial class FrmQLSanPham : Form
@@ -21,6 +22,7 @@ namespace _3.PL.Views
         IQLSachServices _iQLSach;
         IQLNXBServices _iQLNXB;
         Guid _getID;
+        BarcodeLib.Barcode _barcode;
         IQLSanPhamServices _iqSP;
         IQLTheLoaiServices _iQLTL;
         IQLTacGiaServices _iQLTG;
@@ -35,10 +37,12 @@ namespace _3.PL.Views
             _iQLNXB = new QLNXBServices();
             _iQLTG = new QLTacGiaServices();
             _iqSP = new QLSanPhamServices();
+         //   _barcode = new BarcodeLib.Barcode();
             //LoadCBB();
             LoadData();
            
         }
+        
         void LoadData() {
             dtg_show.ColumnCount = 12;
             dtg_show.Rows.Clear();
@@ -419,7 +423,7 @@ namespace _3.PL.Views
         {
             int rd = e.RowIndex;
             _sachChitiet = _iqSP.GetListSachChiTiet().FirstOrDefault(c => c.Id == Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value)));
-            if (rd ==-1 || rd>= _iqSP.GetListSachChiTiet().Count) return;
+            if (rd == -1 || rd >= _iqSP.GetListSachChiTiet().Count) return;
             _getID = _sachChitiet.Id;
             tbt_ma.Text = Convert.ToString(dtg_show.Rows[rd].Cells[2].Value);
             cbb_sach.Text = Convert.ToString(dtg_show.Rows[rd].Cells[3].Value);
@@ -432,6 +436,7 @@ namespace _3.PL.Views
             tbt_slt.Text = Convert.ToString(dtg_show.Rows[rd].Cells[10].Value);
             tbt_sotrang.Text = Convert.ToString(dtg_show.Rows[rd].Cells[11].Value);
             AnhURL = _sachChitiet.Anh;
+          
             if (AnhURL != null && File.Exists(AnhURL))
             {
                 pcb_avt.Image = Image.FromFile(AnhURL);
@@ -441,6 +446,7 @@ namespace _3.PL.Views
             {
                 pcb_avt.Image = null;
             }
+            MaVach();
 
         }
 
@@ -476,6 +482,7 @@ namespace _3.PL.Views
         private void btn_upanh_Click(object sender, EventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
+            op.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
             if (op.ShowDialog() == DialogResult.OK)
             {
                 AnhURL = op.FileName;
@@ -561,6 +568,17 @@ namespace _3.PL.Views
         //    //spv.MauSac = đối tượng mầu sắc trên control mà tìm được
         //    return spv;
         //}
+        void MaVach()
+        {
+            //string barcode = txt_masach.Text;
+            //Image barcode = _barcode.Encode(BarcodeLib.TYPE.CODE128, tbt.Text);
 
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCode qrCode = new QRCode(qrGenerator.CreateQrCode(dtg_show.CurrentRow.Cells[0].Value.ToString(), QRCodeGenerator.ECCLevel.Q));
+            //QRCodeGenerator.ECCLevel.Q là mức chịu lỗi 25%; .L là 7%; .M là 15% và .H là trên 25%
+            pcb_qr.Image = qrCode.GetGraphic(2, Color.Black, Color.White, false);
+            qrGenerator.Dispose();
+            qrCode.Dispose();
+        }
     }
 }

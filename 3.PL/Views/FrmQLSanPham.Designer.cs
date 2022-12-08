@@ -78,6 +78,8 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.dtg_show = new System.Windows.Forms.DataGridView();
+            this.pcb_qr = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panelhome.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -86,6 +88,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_show)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).BeginInit();
             this.SuspendLayout();
             // 
             // nhàXuấtBảnToolStripMenuItem
@@ -141,6 +144,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.pcb_qr);
             this.groupBox1.Controls.Add(this.btn_upanh);
             this.groupBox1.Controls.Add(this.pcb_avt);
             this.groupBox1.Controls.Add(this.label1);
@@ -368,9 +373,9 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(403, 213);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(73, 23);
+            this.label13.Size = new System.Drawing.Size(77, 23);
             this.label13.TabIndex = 26;
-            this.label13.Text = "Số trang";
+            this.label13.Text = "Số trang:";
             // 
             // tbt_slt
             // 
@@ -615,6 +620,23 @@
             this.dtg_show.TabIndex = 0;
             this.dtg_show.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_show_CellClick);
             // 
+            // pcb_qr
+            // 
+            this.pcb_qr.Location = new System.Drawing.Point(514, 249);
+            this.pcb_qr.Name = "pcb_qr";
+            this.pcb_qr.Size = new System.Drawing.Size(80, 80);
+            this.pcb_qr.TabIndex = 33;
+            this.pcb_qr.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(407, 277);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 23);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Mã QR:";
+            // 
             // FrmQLSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -640,6 +662,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_show)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -696,5 +719,7 @@
         private System.Windows.Forms.TextBox tbt_ma;
         private System.Windows.Forms.Button btn_upanh;
         private System.Windows.Forms.PictureBox pcb_avt;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pcb_qr;
     }
 }
