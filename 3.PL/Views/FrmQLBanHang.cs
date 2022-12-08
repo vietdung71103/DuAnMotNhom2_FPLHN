@@ -248,12 +248,22 @@ namespace _3.PL.Views
 
         private void dtg_sp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
-            {
-                DataGridViewRow r = dtg_sp.Rows[e.RowIndex];
-                _idSP = _iqlSP.GetAll().FirstOrDefault(c => c.SachChiTiets.Id == Guid.Parse(r.Cells[0].Value.ToString())).SachChiTiets.Id;
-                ThemVaoGioHang(_idSP);
-            }
+            int rd = e.RowIndex;
+            if (rd == -1 || rd >= _iqlSP.GetListSachChiTiet().Count) return;
+           
+                if (Guid.Parse(dtg_sp.Rows[rd].Cells[0].Value.ToString()) == null)
+                {
+                    MessageBox.Show("Không tồn tại sản phẩm");
+                    return;
+                }
+                else
+                {
+                    _idSP = _iqlSP.GetAll().FirstOrDefault(c => c.SachChiTiets.Id == Guid.Parse(dtg_sp.Rows[rd].Cells[0].Value.ToString())).SachChiTiets.Id;
+                    ThemVaoGioHang(_idSP);
+                }
+              
+              
+            
         }
         public void TongGioHang()
         {
@@ -553,11 +563,11 @@ namespace _3.PL.Views
         private void FrmQLBanHang_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-            if (_captureDevice.IsRunning)
-            {
-             // _captureDevice.Stop();
+            //if (_captureDevice.IsRunning)
+            //{
+            // // _captureDevice.Stop();
                
-            }
+            //}
         }
 
         private void timer1_Tick(object sender, EventArgs e)

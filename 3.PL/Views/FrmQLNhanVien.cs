@@ -272,9 +272,9 @@ namespace _3.PL.Views
         private void dtg_show_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rd = e.RowIndex;
-            nhanVien = _iqlNV.GetListNV().FirstOrDefault(c => c.Id == Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value)));
             if (rd == -1 || rd >= _iqlNV.GetListNV().Count) return;
-            _getID = nhanVien.Id;
+            _getID = Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value));
+            nhanVien = _iqlNV.GetListNV().FirstOrDefault(c => c.Id == Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value)));
             tbt_ma.Text = Convert.ToString(dtg_show.Rows[rd].Cells[2].Value);
             tbt_tennv.Text = Convert.ToString(dtg_show.Rows[rd].Cells[3].Value);
             cbb_gioitinh.Text = Convert.ToString(dtg_show.Rows[rd].Cells[4].Value);

@@ -422,9 +422,11 @@ namespace _3.PL.Views
         private void dtg_show_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int rd = e.RowIndex;
-            _sachChitiet = _iqSP.GetListSachChiTiet().FirstOrDefault(c => c.Id == Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value)));
+            
             if (rd == -1 || rd >= _iqSP.GetListSachChiTiet().Count) return;
-            _getID = _sachChitiet.Id;
+      
+            _getID =Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value));
+            _sachChitiet = _iqSP.GetListSachChiTiet().FirstOrDefault(c => c.Id == Guid.Parse(Convert.ToString(dtg_show.Rows[rd].Cells[0].Value)));
             tbt_ma.Text = Convert.ToString(dtg_show.Rows[rd].Cells[2].Value);
             cbb_sach.Text = Convert.ToString(dtg_show.Rows[rd].Cells[3].Value);
             cbb_tacgia.Text = Convert.ToString(dtg_show.Rows[rd].Cells[4].Value);
@@ -482,7 +484,7 @@ namespace _3.PL.Views
         private void btn_upanh_Click(object sender, EventArgs e)
         {
             OpenFileDialog op = new OpenFileDialog();
-            op.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
+           //op.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;...";
             if (op.ShowDialog() == DialogResult.OK)
             {
                 AnhURL = op.FileName;

@@ -1,5 +1,6 @@
 ﻿using _2.BUS.IServices;
 using _2.BUS.Services;
+using _2.BUS.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,8 @@ namespace _3.PL.Views
         IQLHoaDonChiTietServices _iqHDCT;
         IQLSanPhamServices _iqlSP;
         Guid _idHD;
+        List<ViewHoaDon> lstVHD;
+        List<ViewHoaDonChiTiet> lstVHDCT;
         public FrmHoaDon()
         {
             InitializeComponent();
@@ -25,6 +28,8 @@ namespace _3.PL.Views
             _iqlHD = new QLHoaDonServices();
             _iqlSP = new QLSanPhamServices();
             LoadHoaDon();
+            lstVHD = new List<ViewHoaDon>();
+            lstVHDCT = new List<ViewHoaDonChiTiet>();
             cbb_loc.Items.Add("Đã thanh toán");
             cbb_loc.Items.Add("Chưa thanh toán");
         }
@@ -52,8 +57,8 @@ namespace _3.PL.Views
             dtg_hd.Columns[6].Name = "Ghi chú";
             dtg_hd.Columns[7].Name = "Đơn giá";
             dtg_hd.Columns[8].Name = "Trạng thái";
-           
-            foreach (var x in _iqlHD.GetListViewHoaDon()/*.Where(c=>c.Id == _idHD)*/)
+            lstVHD = _iqlHD.GetListViewHoaDon();
+            foreach (var x in lstVHD/*.Where(c=>c.Id == _idHD)*/)
             {
                 dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, x.TenNhanVien, x.TenKhachHang, x.NgayTao, x.GhiChu,x.TongTien, x.TrangThai);
             }
@@ -103,14 +108,13 @@ namespace _3.PL.Views
         //    dtg_hdct.Columns[7].Name = "Đơn giá";
         private void dtg_hdct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow r = dtg_hdct.Rows[e.RowIndex];
-                
-                tbt_sl.Text = Convert.ToString(r.Cells[6].Value);
-                tbt_dongia.Text = Convert.ToString(r.Cells[7].Value);
+            int rd = e.RowIndex;
+            if (rd == -1 || rd >= _iqHDCT.GetListHoaDonCT().Count) return;
+
+            tbt_sl.Text = Convert.ToString(dtg_hdct.Rows[rd].Cells[6].Value);
+                tbt_dongia.Text = Convert.ToString(dtg_hdct.Rows[rd].Cells[7].Value);
                
-            }
+            
             lb_total.Text = (Convert.ToDecimal(tbt_dongia.Text) * Convert.ToInt32(tbt_sl.Text)).ToString();
 
         }
@@ -125,6 +129,8 @@ namespace _3.PL.Views
             //dtg_hd.Columns[6].Name = "Ghi chú";
             //dtg_hd.Columns[7].Name = "Đơn giá";
             //dtg_hd.Columns[8].Name = "Trạng thái";
+            //int rd = e.RowIndex;
+            //if (rd == -1 || rd >= _iqlHD.GetListHoaDon().Count) return;
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow r = dtg_hd.Rows[e.RowIndex];
@@ -133,11 +139,13 @@ namespace _3.PL.Views
                 tbt_mahd.Text = Convert.ToString(r.Cells[2].Value);
                 tbt_nv.Text = Convert.ToString(r.Cells[3].Value);
                 tbt_kh.Text = Convert.ToString(r.Cells[4].Value);
-                dtp_ngaytao.Text = Convert.ToString(r.Cells[5].Value);
+                dtp_ngaytao.Text = Convert.ToString(r.Cells[5].Value);  
                 tbt_ghichu.Text = Convert.ToString(r.Cells[6].Value);
                 cbb_trangthai.Text = Convert.ToString(r.Cells[8].Value);
             }
-        }
+           
+            }
+        
 
         private void tbt_timkiem_TextChanged(object sender, EventArgs e)
         {
