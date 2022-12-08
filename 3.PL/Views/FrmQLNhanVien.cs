@@ -488,7 +488,7 @@ namespace _3.PL.Views
                     dtg_show.Columns[10].Name = "Mật khẩu";
                     dtg_show.Columns[11].Name = "SDT";
                     dtg_show.Columns[12].Name = "Gửi BC";
-                    foreach (var x in _iqlNV.GetAll().Where(c => c.NhanViens.Ten.ToLower()/*.ToUpper()*/.Contains(tbt_timkiem.Text) && c.ChucVus.Ten ==  cbb_loccv.Text && c.NhanViens.TrangThai == "Hoạt động"))
+                    foreach (var x in _iqlNV.GetAll().Where(c => c.NhanViens.Ten.ToLower()/*.ToUpper()*/.Contains(tbt_timkiem.Text.ToLower()) && c.ChucVus.Ten ==  cbb_loccv.Text && c.NhanViens.TrangThai == "Hoạt động"))
                     {
                         dtg_show.Rows.Add(x.NhanViens.Id,
                             stt++, x.NhanViens.Ma, x.NhanViens.Ten, x.NhanViens.GioiTinh,
@@ -516,7 +516,7 @@ namespace _3.PL.Views
                     dtg_show.Columns[10].Name = "Mật khẩu";
                     dtg_show.Columns[11].Name = "SDT";
                     dtg_show.Columns[12].Name = "Gửi BC";
-                    foreach (var x in _iqlNV.GetAll().Where(c => c.NhanViens.Ten.ToLower()/*.ToUpper()*/.Contains(tbt_timkiem.Text) && c.ChucVus.Ten == cbb_loccv.Text && c.NhanViens.TrangThai == "Không hoạt động"))
+                    foreach (var x in _iqlNV.GetAll().Where(c => c.NhanViens.Ten.ToLower()/*.ToUpper()*/.Contains(tbt_timkiem.Text.ToLower()) && c.ChucVus.Ten == cbb_loccv.Text && c.NhanViens.TrangThai == "Không hoạt động"))
                     {
                         dtg_show.Rows.Add(x.NhanViens.Id,
                             stt++, x.NhanViens.Ma, x.NhanViens.Ten, x.NhanViens.GioiTinh,

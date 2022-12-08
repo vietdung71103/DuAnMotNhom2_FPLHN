@@ -143,7 +143,7 @@
             this.btn_thongbao.Name = "btn_thongbao";
             this.btn_thongbao.Size = new System.Drawing.Size(239, 83);
             this.btn_thongbao.TabIndex = 7;
-            this.btn_thongbao.Text = "Báo cáo,Thống kê";
+            this.btn_thongbao.Text = "Thống kê";
             this.btn_thongbao.UseVisualStyleBackColor = true;
             this.btn_thongbao.Click += new System.EventHandler(this.btn_thongbao_Click);
             // 

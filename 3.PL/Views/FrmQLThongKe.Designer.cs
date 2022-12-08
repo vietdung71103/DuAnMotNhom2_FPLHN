@@ -35,7 +35,7 @@
             this.cbb_kh = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.cbb_tl = new System.Windows.Forms.ComboBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -130,11 +130,12 @@
             this.cbb_kh.Size = new System.Drawing.Size(376, 37);
             this.cbb_kh.TabIndex = 0;
             this.cbb_kh.SelectedValueChanged += new System.EventHandler(this.comboBox3_SelectedValueChanged);
+            this.cbb_kh.TextChanged += new System.EventHandler(this.cbb_kh_TextChanged);
             // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.label27);
-            this.groupBox4.Controls.Add(this.comboBox4);
+            this.groupBox4.Controls.Add(this.cbb_tl);
             this.groupBox4.Location = new System.Drawing.Point(446, 178);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(367, 132);
@@ -152,14 +153,15 @@
             this.label27.TabIndex = 53;
             this.label27.Text = "Thể loại";
             // 
-            // comboBox4
+            // cbb_tl
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(6, 71);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(279, 37);
-            this.comboBox4.TabIndex = 0;
-            this.comboBox4.SelectedValueChanged += new System.EventHandler(this.comboBox4_SelectedValueChanged);
+            this.cbb_tl.FormattingEnabled = true;
+            this.cbb_tl.Location = new System.Drawing.Point(6, 71);
+            this.cbb_tl.Name = "cbb_tl";
+            this.cbb_tl.Size = new System.Drawing.Size(279, 37);
+            this.cbb_tl.TabIndex = 0;
+            this.cbb_tl.SelectedValueChanged += new System.EventHandler(this.comboBox4_SelectedValueChanged);
+            this.cbb_tl.TextChanged += new System.EventHandler(this.cbb_tl_TextChanged);
             // 
             // groupBox3
             // 
@@ -532,7 +534,7 @@
         private System.Windows.Forms.ComboBox cbb_kh;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.ComboBox cbb_tl;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label18;

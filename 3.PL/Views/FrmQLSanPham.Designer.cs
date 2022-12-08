@@ -36,11 +36,14 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.panelhome = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.pcb_qr = new System.Windows.Forms.PictureBox();
             this.btn_upanh = new System.Windows.Forms.Button();
             this.pcb_avt = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbt_ma = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.btn_loc = new System.Windows.Forms.Button();
             this.tbt_gialoccao = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -78,17 +81,15 @@
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.dtg_show = new System.Windows.Forms.DataGridView();
-            this.pcb_qr = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.panelhome.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_avt)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_show)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).BeginInit();
             this.SuspendLayout();
             // 
             // nhàXuấtBảnToolStripMenuItem
@@ -177,6 +178,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(407, 277);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 23);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Mã QR:";
+            // 
+            // pcb_qr
+            // 
+            this.pcb_qr.Location = new System.Drawing.Point(514, 249);
+            this.pcb_qr.Name = "pcb_qr";
+            this.pcb_qr.Size = new System.Drawing.Size(80, 80);
+            this.pcb_qr.TabIndex = 33;
+            this.pcb_qr.TabStop = false;
+            // 
             // btn_upanh
             // 
             this.btn_upanh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -221,6 +239,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(19)))), ((int)(((byte)(49)))));
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.btn_loc);
             this.panel2.Controls.Add(this.tbt_gialoccao);
             this.panel2.Controls.Add(this.label18);
@@ -239,11 +258,23 @@
             this.panel2.Size = new System.Drawing.Size(223, 404);
             this.panel2.TabIndex = 28;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.White;
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Location = new System.Drawing.Point(81, 360);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 35);
+            this.button1.TabIndex = 41;
+            this.button1.Text = "Bỏ lọc";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // btn_loc
             // 
             this.btn_loc.BackColor = System.Drawing.Color.White;
             this.btn_loc.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btn_loc.Location = new System.Drawing.Point(82, 336);
+            this.btn_loc.Location = new System.Drawing.Point(81, 319);
             this.btn_loc.Name = "btn_loc";
             this.btn_loc.Size = new System.Drawing.Size(102, 35);
             this.btn_loc.TabIndex = 40;
@@ -258,6 +289,7 @@
             this.tbt_gialoccao.Name = "tbt_gialoccao";
             this.tbt_gialoccao.Size = new System.Drawing.Size(137, 24);
             this.tbt_gialoccao.TabIndex = 38;
+            this.tbt_gialoccao.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbt_gialoccao_KeyPress);
             // 
             // label18
             // 
@@ -276,6 +308,7 @@
             this.tbt_gialocthap.Name = "tbt_gialocthap";
             this.tbt_gialocthap.Size = new System.Drawing.Size(137, 24);
             this.tbt_gialocthap.TabIndex = 29;
+            this.tbt_gialocthap.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbt_gialocthap_KeyPress);
             // 
             // label17
             // 
@@ -620,23 +653,6 @@
             this.dtg_show.TabIndex = 0;
             this.dtg_show.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_show_CellClick);
             // 
-            // pcb_qr
-            // 
-            this.pcb_qr.Location = new System.Drawing.Point(514, 249);
-            this.pcb_qr.Name = "pcb_qr";
-            this.pcb_qr.Size = new System.Drawing.Size(80, 80);
-            this.pcb_qr.TabIndex = 33;
-            this.pcb_qr.TabStop = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(407, 277);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 23);
-            this.label3.TabIndex = 34;
-            this.label3.Text = "Mã QR:";
-            // 
             // FrmQLSanPham
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -655,6 +671,7 @@
             this.panelhome.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_avt)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -662,7 +679,6 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_show)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -721,5 +737,6 @@
         private System.Windows.Forms.PictureBox pcb_avt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pcb_qr;
+        private System.Windows.Forms.Button button1;
     }
 }

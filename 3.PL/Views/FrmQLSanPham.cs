@@ -28,6 +28,7 @@ namespace _3.PL.Views
         IQLTacGiaServices _iQLTG;
         SachChiTiet _sachChitiet;
         string AnhURL = "";
+        
         public FrmQLSanPham()
         {
             InitializeComponent();
@@ -38,9 +39,9 @@ namespace _3.PL.Views
             _iQLTG = new QLTacGiaServices();
             _iqSP = new QLSanPhamServices();
          //   _barcode = new BarcodeLib.Barcode();
-            //LoadCBB();
+            LoadCBB();
             LoadData();
-           
+            
         }
         
         void LoadData() {
@@ -86,6 +87,18 @@ namespace _3.PL.Views
             foreach (var x in _iQLTL.GetListTheLoai())
             {
                 cbb_theloai.Items.Add(x.Ten);
+            }
+            foreach (var x in _iQLNXB.GetListNXB())
+            {
+                cbb_locnxb.Items.Add(x.Ten);
+            }
+            foreach (var x in _iQLTG.GetListTacGia())
+            {
+                cbb_loctg.Items.Add(x.Ten);
+            }
+            foreach (var x in _iQLTL.GetListTheLoai())
+            {
+                cbb_loctl.Items.Add(x.Ten);
             }
         }
         Form activeForm;
@@ -540,8 +553,38 @@ namespace _3.PL.Views
 
         private void btn_loc_Click(object sender, EventArgs e)
         {
-
+            if(Convert.ToDecimal(tbt_gialoccao.Text) < Convert.ToDecimal(tbt_gialocthap.Text))
+            {
+                MessageBox.Show("Không được nhập giá kết thúc cao hơn giá bắt đầu", "Cảnh báo");
+                return;
+            }
+            dtg_show.ColumnCount = 12;
+            dtg_show.Rows.Clear();
+            int stt = 1;
+            dtg_show.Columns[0].Name = "ID";
+            dtg_show.Columns[0].Visible = false;
+            dtg_show.Columns[1].Name = "STT";
+            dtg_show.Columns[2].Name = "Mã";
+            dtg_show.Columns[3].Name = "Sách";
+            dtg_show.Columns[4].Name = "Tác giả";
+            dtg_show.Columns[5].Name = "Thể loại";
+            dtg_show.Columns[6].Name = "Nhà xuất bản";
+            //dtg_show.Columns[6].Name = "Ảnh";
+            dtg_show.Columns[7].Name = "Mô tả";
+            dtg_show.Columns[8].Name = "Giá nhập";
+            dtg_show.Columns[9].Name = "Giá bán";
+            dtg_show.Columns[10].Name = "Số lượng tồn";
+            dtg_show.Columns[11].Name = "Số trang";
+            foreach (var x in _iqSP.GetAll().Where(c=>c.TheLoais.Ten.Contains(cbb_loctl.Text) && c.TacGias.Ten.Contains(cbb_loctg.Text) && c.NXBs.Ten.Contains(cbb_locnxb.Text) &&
+            c.SachChiTiets.GiaBan >= Convert.ToDecimal( tbt_gialocthap.Text) && c.SachChiTiets.GiaBan <= Convert.ToDecimal(tbt_gialoccao.Text)))
+            {
+                dtg_show.Rows.Add(x.SachChiTiets.Id, stt++, x.SachChiTiets.Ma, x.Sachs.Ten, x.TacGias.Ten,
+                    x.TheLoais.Ten, x.NXBs.Ten/*, x.Anhs.Ten*/, x.SachChiTiets.MoTa,
+                    x.SachChiTiets.GiaNhap, x.SachChiTiets.GiaBan,
+                    x.SachChiTiets.SoLuongTon, x.SachChiTiets.SoTrang);
+            }
         }
+
 
         private void FrmQLSanPham_Load(object sender, EventArgs e)
         {
@@ -581,6 +624,28 @@ namespace _3.PL.Views
             pcb_qr.Image = qrCode.GetGraphic(2, Color.Black, Color.White, false);
             qrGenerator.Dispose();
             qrCode.Dispose();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadData();
+            cbb_locnxb.SelectedIndex = -1;
+            cbb_loctg.SelectedIndex = -1;
+            cbb_loctl.SelectedIndex = -1;
+            tbt_gialoccao.Text = "";
+            tbt_gialocthap.Text = "";
+        }
+
+        private void tbt_gialocthap_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
+        }
+
+        private void tbt_gialoccao_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
+                e.Handled = true;
         }
     }
 }
