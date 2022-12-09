@@ -146,12 +146,8 @@ namespace _3.PL.Views
             DialogResult result = MessageBox.Show("Bạn có muốn sửa không ?", "Thông báo", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                if(_iql.GetListKhachHang().Any(c=>c.Id == _getID) == false)
-                {
-                    MessageBox.Show("Không tìm thấy");
-                }
-                else
-                {
+               
+               
                     foreach (var x in _iql.GetListKhachHang().Where(c=>c.Id == _getID))
                     {
                         x.Ten = tbt_tenkh.Text;
@@ -162,7 +158,7 @@ namespace _3.PL.Views
                         MessageBox.Show(_iql.Update(x));
                     }
                     ResetForm();
-                }
+                
             }
             else
             {
@@ -176,15 +172,11 @@ namespace _3.PL.Views
             DialogResult result = MessageBox.Show("Bạn có muốn xoá không ?", "Thông báo", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                if (_iql.GetListKhachHang().Any(c => c.Id == _getID) == false)
-                {
-                    MessageBox.Show("Không tìm thấy");
-                }
-                else
-                {
+                
+             
                     MessageBox.Show(_iql.Delete(xoa));
                     ResetForm();
-                }
+         
             }
         }
 

@@ -75,12 +75,15 @@
             this.cbb_nxb = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_nhap = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tbt_timkiem = new System.Windows.Forms.TextBox();
             this.btn_sua = new System.Windows.Forms.Button();
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.dtg_show = new System.Windows.Forms.DataGridView();
+            this.sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
+            this.btn_xuat = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panelhome.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -564,6 +567,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btn_xuat);
+            this.groupBox2.Controls.Add(this.btn_nhap);
             this.groupBox2.Controls.Add(this.pictureBox2);
             this.groupBox2.Controls.Add(this.tbt_timkiem);
             this.groupBox2.Controls.Add(this.btn_sua);
@@ -573,10 +578,23 @@
             this.groupBox2.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.groupBox2.Location = new System.Drawing.Point(3, 430);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1322, 403);
+            this.groupBox2.Size = new System.Drawing.Size(1322, 228);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hiển thị";
+            // 
+            // btn_nhap
+            // 
+            this.btn_nhap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nhap.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_nhap.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_nhap.Location = new System.Drawing.Point(638, 29);
+            this.btn_nhap.Name = "btn_nhap";
+            this.btn_nhap.Size = new System.Drawing.Size(156, 36);
+            this.btn_nhap.TabIndex = 20;
+            this.btn_nhap.Text = "Nhập file Excel";
+            this.btn_nhap.UseVisualStyleBackColor = true;
+            this.btn_nhap.Click += new System.EventHandler(this.btn_nhap_Click);
             // 
             // pictureBox2
             // 
@@ -594,7 +612,7 @@
             this.tbt_timkiem.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tbt_timkiem.Location = new System.Drawing.Point(56, 35);
             this.tbt_timkiem.Name = "tbt_timkiem";
-            this.tbt_timkiem.Size = new System.Drawing.Size(436, 27);
+            this.tbt_timkiem.Size = new System.Drawing.Size(377, 27);
             this.tbt_timkiem.TabIndex = 18;
             this.tbt_timkiem.TextChanged += new System.EventHandler(this.tbt_timkiem_TextChanged);
             // 
@@ -604,7 +622,7 @@
             this.btn_sua.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_sua.Image = ((System.Drawing.Image)(resources.GetObject("btn_sua.Image")));
             this.btn_sua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_sua.Location = new System.Drawing.Point(886, 29);
+            this.btn_sua.Location = new System.Drawing.Point(988, 29);
             this.btn_sua.Name = "btn_sua";
             this.btn_sua.Size = new System.Drawing.Size(156, 36);
             this.btn_sua.TabIndex = 3;
@@ -618,7 +636,7 @@
             this.btn_xoa.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_xoa.Image = ((System.Drawing.Image)(resources.GetObject("btn_xoa.Image")));
             this.btn_xoa.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_xoa.Location = new System.Drawing.Point(1059, 29);
+            this.btn_xoa.Location = new System.Drawing.Point(1161, 29);
             this.btn_xoa.Name = "btn_xoa";
             this.btn_xoa.Size = new System.Drawing.Size(156, 36);
             this.btn_xoa.TabIndex = 2;
@@ -632,7 +650,7 @@
             this.btn_them.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.btn_them.Image = ((System.Drawing.Image)(resources.GetObject("btn_them.Image")));
             this.btn_them.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_them.Location = new System.Drawing.Point(711, 29);
+            this.btn_them.Location = new System.Drawing.Point(813, 29);
             this.btn_them.Name = "btn_them";
             this.btn_them.Size = new System.Drawing.Size(156, 36);
             this.btn_them.TabIndex = 1;
@@ -649,9 +667,28 @@
             this.dtg_show.Name = "dtg_show";
             this.dtg_show.RowTemplate.Height = 25;
             this.dtg_show.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_show.Size = new System.Drawing.Size(1316, 329);
+            this.dtg_show.Size = new System.Drawing.Size(1316, 154);
             this.dtg_show.TabIndex = 0;
             this.dtg_show.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_show_CellClick);
+            // 
+            // sqlCommandBuilder1
+            // 
+            this.sqlCommandBuilder1.DataAdapter = null;
+            this.sqlCommandBuilder1.QuotePrefix = "[";
+            this.sqlCommandBuilder1.QuoteSuffix = "]";
+            // 
+            // btn_xuat
+            // 
+            this.btn_xuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_xuat.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_xuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_xuat.Location = new System.Drawing.Point(464, 29);
+            this.btn_xuat.Name = "btn_xuat";
+            this.btn_xuat.Size = new System.Drawing.Size(156, 36);
+            this.btn_xuat.TabIndex = 21;
+            this.btn_xuat.Text = "Xuất file PDF";
+            this.btn_xuat.UseVisualStyleBackColor = true;
+            this.btn_xuat.Click += new System.EventHandler(this.btn_xuat_Click);
             // 
             // FrmQLSanPham
             // 
@@ -738,5 +775,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pcb_qr;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_nhap;
+        private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
+        private System.Windows.Forms.Button btn_xuat;
     }
 }

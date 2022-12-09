@@ -339,10 +339,7 @@ namespace _3.PL.Views
             DialogResult result = MessageBox.Show("Bạn có muốn sửa?", "Thông báo", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                if (_iqSP.GetListSachChiTiet().Any(c => c.Id == _getID) == false) MessageBox.Show("Không tìm thấy");
-                
-                else
-                {
+              
                     
                     foreach (var x in _iqSP.GetListSachChiTiet().Where(c=>c.Id == _getID))
                     {
@@ -364,7 +361,7 @@ namespace _3.PL.Views
                         x.Anh = AnhURL;
                         MessageBox.Show(_iqSP.Update(x));
                         ResetForm();
-                    }
+                    
                     //foreach (var x in _iqSP.GetAll().Where(c => c.SachChiTiets.Id == _getID))
                     //{
                     //    x.SachChiTiets.IdTacGia = _iQLTG.GetListTacGia().Where(c => c.Ten == cbb_tacgia.Text).Select(c => c.Id).FirstOrDefault();
@@ -379,7 +376,7 @@ namespace _3.PL.Views
                     //    x.SachChiTiets.Anh = AnhURL;
                     //    MessageBox.Show(_iqSP.Update(x.SachChiTiets));
                     //}
-                }
+                     }
             }
             else
             {
@@ -389,24 +386,16 @@ namespace _3.PL.Views
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            var xoa = _iqSP.GetListSachChiTiet().Where(c => c.Id == _getID).FirstOrDefault();
+            var xoa = _iqSP.GetListSachChiTiet().FirstOrDefault(c => c.Id == _getID);
                  DialogResult result = MessageBox.Show("Bạn có muốn xoá?", "Thông báo", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
-                {
-                if(_iqSP.GetListSachChiTiet().Any(c=>c.Id == _getID) == false)
-                {
-                    MessageBox.Show("Không tìm thấy sản phẩm");
-                }
-                else
-                {
-                    foreach (var x in _iqSP.GetListSachChiTiet().Where(c=>c.Id == _getID))
-                    {
+                { 
                         MessageBox.Show(_iqSP.Delete(xoa));
-                    }
+                    
                     ResetForm();
                 }
-            }
-            }
+         
+        }
         //dtg_show.Columns[1].Name = "STT";
         //    dtg_show.Columns[2].Name = "Sách";
         //    dtg_show.Columns[3].Name = "Tác giả";
@@ -646,6 +635,20 @@ namespace _3.PL.Views
         {
             if (!Char.IsDigit(e.KeyChar) && !Char.IsControl(e.KeyChar))
                 e.Handled = true;
+        }
+
+        private void btn_nhap_Click(object sender, EventArgs e)
+        {
+            NhapFileExcel frm = new NhapFileExcel();
+            this.Hide();
+            frm.Show();
+        }
+
+        private void btn_xuat_Click(object sender, EventArgs e)
+        {
+            XuatFilePDF frm = new XuatFilePDF();
+            this.Hide();
+            frm.Show();
         }
     }
 }

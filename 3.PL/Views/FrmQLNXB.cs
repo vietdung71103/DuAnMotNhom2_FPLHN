@@ -101,12 +101,7 @@ namespace _3.PL.Views
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn sửa ?", "Thông Báo", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if (_services.GetListNXB().Any(c => c.Id == _getID) == false)
-                {
-                    MessageBox.Show("Không tìm thấy");
-                }
-                else
-                {
+                
                     foreach (var x in _services.GetListNXB().Where(c => c.Id == _getID))
                     {
 
@@ -115,7 +110,7 @@ namespace _3.PL.Views
                         ResetForm();
                     }
 
-                }
+                
             }
         }
 
