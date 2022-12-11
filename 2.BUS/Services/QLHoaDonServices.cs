@@ -37,6 +37,20 @@ namespace _2.BUS.Services
             return "Xoá thành công";
         }
 
+        public List<ViewHD> GetHD()
+        {
+            var x = (from a in _dbContext.HoaDons.ToList()
+                     join b in _dbContext.KhachHangs.ToList() on a.IdKhachHang equals b.Id
+                     join c in _dbContext.NhanViens.ToList() on a.IdNhanVien equals c.Id
+                     select new ViewHD()
+                     {
+                         HoaDons = a,
+                         KhachHangs = b,
+                         NhanViens = c
+                     }).ToList();
+            return x;
+        }
+
         public List<HoaDon> GetListHoaDon()
         {
            _lst = _rpsHD.GetListHoaDon();

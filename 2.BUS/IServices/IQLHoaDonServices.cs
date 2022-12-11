@@ -15,5 +15,6 @@ namespace _2.BUS.IServices
         string Delete(HoaDon obj);
         List<ViewHoaDon> GetListViewHoaDon();
         List<HoaDon> GetListHoaDon();
+        List<ViewHD> GetHD();
     }
 }

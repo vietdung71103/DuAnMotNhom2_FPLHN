@@ -22,10 +22,11 @@ namespace _3.PL.Views
         string email;
         List<NhanVien> _lst;
         private string hemail = "duongnbph22612@fpt.edu.vn";
-        private string haha = "Gửi mail Từ Phần Mềm quản lý cửa hàng bán sách";
+        private string haha = "Gửi mail Từ Phần Mềm quản lý cửa hàng bán sách mã xác nhận của bạn là:  ";
         private string hihi;
         private string a;
         private string tk;
+        string code;
         public FrmQuenMatKhau()
         {
             InitializeComponent();
@@ -36,69 +37,48 @@ namespace _3.PL.Views
 
         private void btn_xacnhan_Click(object sender, EventArgs e)
         {
-            try
+            if (tbt_mxn.Text == code)
             {
-                var nv = _iql.GetListNV().Where(c=>c.Email == tbt_email.Text).Select(c=>c.Email).FirstOrDefault();
-                if (nv == tbt_email.Text)
+                if (tbt_mk.Text == tbt_nhaplaimk.Text)
                 {
-                    email = tbt_email.Text;
-                    a = ramdomMK();
-                    hihi = "Mã xác nhận của bạn là: " + a;
-                    guiMail(tbt_email.Text);
-                    MessageBox.Show("Gửi email thành công", "Thông báo");
-                    foreach (var x in _iql.GetListNV().Where(c => c.Email == tbt_email.Text))
-                    {
-                        x.Password = a;
-                        _iql.Update(x);
-                    }
-                   
-                   
-                   
+                    NhanVien nhanVien = _iql.GetListNV().Where(c => c.Email == tbt_email.Text).FirstOrDefault();
+                    nhanVien.Password = tbt_mk.Text;
+                    MessageBox.Show(_iql.Update(nhanVien));
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(Convert.ToString(ex.Message), "Lỗi");
-                
+                else
+                {
+                    MessageBox.Show("Mật khẩu nhập lại không đúng");
+                }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+           
+                string from, pass, to;
+                from = "dungnvph22426@fpt.edu.vn";
+                pass = "duymanh123";
+                to = tbt_email.Text;
+                MailMessage message = new MailMessage();
+                message.To.Add(to);
+                message.From = new MailAddress(from);
+                code = ramdomMK();
+                message.Body = haha + code;
+                message.Subject = "Reset";
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
+            smtp.Port = 587;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Credentials = new NetworkCredential(from, pass);
+
             try
             {
-                var nv = _iql.GetListNV().Where(c => c.Email == email).Select(c => c.Password).FirstOrDefault();
-                if(tbt_mxn.Text == nv)
-                {
-                    if(tbt_mk.Text == tbt_nhaplaimk.Text)
-                    {
-                        var nvn = _iql.GetListNV().Where(c => c.Email == tbt_email.Text);
-                        foreach (var x in nvn)
-                        {
-                            
-                            x.Password = tbt_nhaplaimk.Text;
-                            _iql.Update(x);
-                            MessageBox.Show("Đã đổi mật khẩu");
-                            
-                        }
-                        Login frm = new Login();
-                        this.Hide();
-                        frm.Show();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Mật khẩu phải trùng nhau");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Mã xác nhận không chính xác");
-                }
+                smtp.Send(message);
+                MessageBox.Show("Đợi", "Thông báo");
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(Convert.ToString(ex.Message), "Lỗi");
+                MessageBox.Show(ex.Message);
             }
         }
         public string ramdomMK()
@@ -108,13 +88,6 @@ namespace _3.PL.Views
             string s = x.ToString("000000");
             return s;
         }
-        public void guiMail(string text)
-        {
-            MailMessage mess = new MailMessage(hemail, email, haha, hihi);
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("huynqph22527@fpt.edu.vn", "huynq");
-            client.Send(mess);
-        }
+        
     }
 }

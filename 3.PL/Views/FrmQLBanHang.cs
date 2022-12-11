@@ -149,11 +149,11 @@ namespace _3.PL.Views
         // Lát copy lại sau
         void LoadSanPham()
             {
-            DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
-            btn = new DataGridViewButtonColumn();
-            btn.Text = "Xem";
-            btn.Name = "Xem";
-            btn.HeaderText = "";
+            //DataGridViewButtonColumn btn = new DataGridViewButtonColumn();
+            //btn = new DataGridViewButtonColumn();
+            //btn.Text = "Xem";
+            //btn.Name = "Xem";
+            //btn.HeaderText = "";
 
                 dtg_sp.ColumnCount = 12;
                 dtg_sp.Rows.Clear();
@@ -174,14 +174,14 @@ namespace _3.PL.Views
                 dtg_sp.Columns[10].Name = "Số lượng tồn";
                 dtg_sp.Columns[11].Name = "Số trang";
                 dtg_sp.Columns[11].Visible = false;
-                 dtg_sp.Columns.Add(btn);
+               //  dtg_sp.Columns.Add(btn);
                 
             foreach (var x in _iqlSP.GetAll())
                 {
                     dtg_sp.Rows.Add(x.SachChiTiets.Id, stt++, x.SachChiTiets.Ma, x.Sachs.Ten, x.TacGias.Ten,
                         x.TheLoais.Ten, x.NXBs.Ten/*, x.Anhs.Ten*/, x.SachChiTiets.MoTa,
                         x.SachChiTiets.GiaNhap, x.SachChiTiets.GiaBan,
-                        x.SachChiTiets.SoLuongTon, x.SachChiTiets.SoTrang,btn.Text = ("Xem"));
+                        x.SachChiTiets.SoLuongTon/*, x.SachChiTiets.SoTrang,btn.Text = ("Xem")*/);
                 }
             }
             //         public Guid Id { get; set; }

@@ -98,10 +98,11 @@ namespace _3.PL.Views
                 DialogResult result = MessageBox.Show("Bạn có muốn xuất ra file PDF không ?", "Thông báo", MessageBoxButtons.YesNo);
                 if(result == DialogResult.Yes)
                 {
+                    
                     XuatDuLieu(dtg_show, "FilePDF");
                     MessageBox.Show("Xuất file thành công", "Thông báo");
                 }
-                if(result != DialogResult.Yes)
+                if(result == DialogResult.No)
                 {
                     MessageBox.Show("Không xuất thì thôi");
                 }

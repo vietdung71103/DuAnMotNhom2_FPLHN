@@ -109,9 +109,9 @@
             this.groupBox1.Controls.Add(this.tbt_xoasp);
             this.groupBox1.Controls.Add(this.dtg_giohang);
             this.groupBox1.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(1, 81);
+            this.groupBox1.Location = new System.Drawing.Point(1, 67);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(853, 391);
+            this.groupBox1.Size = new System.Drawing.Size(853, 387);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Giỏ Hàng";
@@ -160,9 +160,9 @@
             // pcb_qr
             // 
             this.pcb_qr.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pcb_qr.Location = new System.Drawing.Point(299, 17);
+            this.pcb_qr.Location = new System.Drawing.Point(266, 17);
             this.pcb_qr.Name = "pcb_qr";
-            this.pcb_qr.Size = new System.Drawing.Size(150, 150);
+            this.pcb_qr.Size = new System.Drawing.Size(183, 184);
             this.pcb_qr.TabIndex = 30;
             this.pcb_qr.TabStop = false;
             // 
@@ -262,7 +262,7 @@
             this.tbt_xoagiohang.ForeColor = System.Drawing.SystemColors.Desktop;
             this.tbt_xoagiohang.Image = ((System.Drawing.Image)(resources.GetObject("tbt_xoagiohang.Image")));
             this.tbt_xoagiohang.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tbt_xoagiohang.Location = new System.Drawing.Point(149, 26);
+            this.tbt_xoagiohang.Location = new System.Drawing.Point(136, 26);
             this.tbt_xoagiohang.Name = "tbt_xoagiohang";
             this.tbt_xoagiohang.Size = new System.Drawing.Size(124, 44);
             this.tbt_xoagiohang.TabIndex = 4;
@@ -292,11 +292,11 @@
             this.dtg_giohang.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtg_giohang.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtg_giohang.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_giohang.Location = new System.Drawing.Point(3, 173);
+            this.dtg_giohang.Location = new System.Drawing.Point(3, 203);
             this.dtg_giohang.Name = "dtg_giohang";
             this.dtg_giohang.RowTemplate.Height = 25;
             this.dtg_giohang.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_giohang.Size = new System.Drawing.Size(847, 215);
+            this.dtg_giohang.Size = new System.Drawing.Size(847, 181);
             this.dtg_giohang.TabIndex = 0;
             this.dtg_giohang.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_giohang_CellClick);
             this.dtg_giohang.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_giohang_CellValueChanged);
@@ -307,9 +307,9 @@
             this.groupBox2.Controls.Add(this.dtg_sp);
             this.groupBox2.Controls.Add(this.tbt_timkiemsp);
             this.groupBox2.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(1, 478);
+            this.groupBox2.Location = new System.Drawing.Point(1, 449);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(850, 205);
+            this.groupBox2.Size = new System.Drawing.Size(850, 234);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Sản phẩm";
@@ -317,7 +317,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 35);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 29);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(42, 39);
             this.pictureBox1.TabIndex = 3;
@@ -328,11 +328,11 @@
             this.dtg_sp.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dtg_sp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtg_sp.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_sp.Location = new System.Drawing.Point(3, 75);
+            this.dtg_sp.Location = new System.Drawing.Point(3, 71);
             this.dtg_sp.Name = "dtg_sp";
             this.dtg_sp.RowTemplate.Height = 25;
             this.dtg_sp.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_sp.Size = new System.Drawing.Size(844, 127);
+            this.dtg_sp.Size = new System.Drawing.Size(844, 160);
             this.dtg_sp.TabIndex = 2;
             this.dtg_sp.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_sp_CellClick);
             // 
@@ -562,7 +562,7 @@
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(181, 7);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(93, 83);
+            this.pictureBox2.Size = new System.Drawing.Size(80, 68);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 5;
             this.pictureBox2.TabStop = false;

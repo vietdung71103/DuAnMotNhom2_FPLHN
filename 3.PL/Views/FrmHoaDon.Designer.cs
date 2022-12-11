@@ -45,7 +45,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtp_ngaytao = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtg_hd = new System.Windows.Forms.DataGridView();
             this.tbt_mahd = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -56,11 +55,12 @@
             this.tbt_dongia = new System.Windows.Forms.TextBox();
             this.tbt_sl = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.dtg_hd = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_hdct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -234,19 +234,6 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Mã hoá đơn:";
             // 
-            // dtg_hd
-            // 
-            this.dtg_hd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtg_hd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtg_hd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_hd.Location = new System.Drawing.Point(3, 172);
-            this.dtg_hd.Name = "dtg_hd";
-            this.dtg_hd.RowTemplate.Height = 25;
-            this.dtg_hd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_hd.Size = new System.Drawing.Size(1214, 162);
-            this.dtg_hd.TabIndex = 0;
-            this.dtg_hd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_hd_CellClick);
-            // 
             // tbt_mahd
             // 
             this.tbt_mahd.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -355,6 +342,19 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Số lượng:";
             // 
+            // dtg_hd
+            // 
+            this.dtg_hd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtg_hd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtg_hd.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dtg_hd.Location = new System.Drawing.Point(3, 172);
+            this.dtg_hd.Name = "dtg_hd";
+            this.dtg_hd.RowTemplate.Height = 25;
+            this.dtg_hd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtg_hd.Size = new System.Drawing.Size(1214, 162);
+            this.dtg_hd.TabIndex = 0;
+            this.dtg_hd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_hd_CellClick);
+            // 
             // FrmHoaDon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -369,10 +369,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_hdct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -380,7 +380,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dtg_hd;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dtg_hdct;
         private System.Windows.Forms.Label label4;
@@ -406,5 +405,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cbb_loc;
+        private System.Windows.Forms.DataGridView dtg_hd;
     }
 }

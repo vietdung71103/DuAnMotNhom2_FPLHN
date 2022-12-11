@@ -1,4 +1,5 @@
-﻿using _2.BUS.IServices;
+﻿using _1.DAL.Models;
+using _2.BUS.IServices;
 using _2.BUS.Services;
 using _2.BUS.ViewModels;
 using System;
@@ -19,6 +20,10 @@ namespace _3.PL.Views
         IQLHoaDonChiTietServices _iqHDCT;
         IQLSanPhamServices _iqlSP;
         Guid _idHD;
+        KhachHang _kh;
+        NhanVien _nv;
+        IQLNhanVienServices _iqlNV;
+        IQLKhachHangServices _iqlKH;
         List<ViewHoaDon> lstVHD;
         List<ViewHoaDonChiTiet> lstVHDCT;
         public FrmHoaDon()
@@ -28,6 +33,10 @@ namespace _3.PL.Views
             _iqlHD = new QLHoaDonServices();
             _iqlSP = new QLSanPhamServices();
             LoadHoaDon();
+            _iqlNV = new QLNhanVienServices();
+            _iqlKH = new QLKhachHangServices();
+            _kh = new KhachHang();
+            _nv = new NhanVien();
             lstVHD = new List<ViewHoaDon>();
             lstVHDCT = new List<ViewHoaDonChiTiet>();
             cbb_loc.Items.Add("Đã thanh toán");
@@ -57,10 +66,11 @@ namespace _3.PL.Views
             dtg_hd.Columns[6].Name = "Ghi chú";
             dtg_hd.Columns[7].Name = "Đơn giá";
             dtg_hd.Columns[8].Name = "Trạng thái";
-            lstVHD = _iqlHD.GetListViewHoaDon();
-            foreach (var x in lstVHD/*.Where(c=>c.Id == _idHD)*/)
+           // lstVHD = _iqlHD.GetListViewHoaDon();
+            foreach (var x in _iqlHD.GetHD()/*.Where(c=>c.Id == _idHD)*/)
             {
-                dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, x.TenNhanVien, x.TenKhachHang, x.NgayTao, x.GhiChu,x.TongTien, x.TrangThai);
+               
+                dtg_hd.Rows.Add(x.HoaDons.Id, stt++, x.HoaDons.MaHoaDon, x.NhanViens.Ten,x.KhachHangs.Ten, x.HoaDons.NgayTao, x.HoaDons.GhiChu,x.HoaDons.DonGia, x.HoaDons.TrangThai);
             }
         }
         //public Guid Id { get; set; }
@@ -151,6 +161,8 @@ namespace _3.PL.Views
         {
             dtg_hd.ColumnCount = 9;
             int stt = 1;
+            dtg_hd.Rows.Clear();
+            dtg_hdct.Rows.Clear();
             dtg_hd.Columns[0].Name = "";
             dtg_hd.Columns[0].Visible = false;
             dtg_hd.Columns[1].Name = "STT";
@@ -161,11 +173,12 @@ namespace _3.PL.Views
             dtg_hd.Columns[6].Name = "Ghi chú";
             dtg_hd.Columns[7].Name = "Đơn giá";
             dtg_hd.Columns[8].Name = "Trạng thái";
-            dtg_hd.Rows.Clear();
-            dtg_hdct.Rows.Clear();
-            foreach (var x in _iqlHD.GetListViewHoaDon().Where(c=>c.MaHoaDon.ToLower().Contains(tbt_timkiem.Text)))
+            // lstVHD = _iqlHD.GetListViewHoaDon();
+            foreach (var x in _iqlHD.GetListHoaDon().Where(c=>c.MaHoaDon.ToLower().Contains(tbt_timkiem.Text.ToLower()))/*.Where(c=>c.Id == _idHD)*/)
             {
-                dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, x.TenNhanVien, x.TenKhachHang, x.NgayTao, x.GhiChu, x.TongTien, x.TrangThai);
+                _nv = _iqlNV.GetListNV().Find(c => c.Id == x.IdNhanVien);
+                _kh = _iqlKH.GetListKhachHang().Find(c => c.Id == x.IdKhachHang);
+                dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, _nv.Ten, _kh.Ten, x.NgayTao, x.GhiChu, x.DonGia, x.TrangThai);
             }
         }
 
@@ -175,6 +188,8 @@ namespace _3.PL.Views
             {
                 dtg_hd.ColumnCount = 9;
                 int stt = 1;
+                dtg_hd.Rows.Clear();
+                dtg_hdct.Rows.Clear();
                 dtg_hd.Columns[0].Name = "";
                 dtg_hd.Columns[0].Visible = false;
                 dtg_hd.Columns[1].Name = "STT";
@@ -185,11 +200,11 @@ namespace _3.PL.Views
                 dtg_hd.Columns[6].Name = "Ghi chú";
                 dtg_hd.Columns[7].Name = "Đơn giá";
                 dtg_hd.Columns[8].Name = "Trạng thái";
-                dtg_hd.Rows.Clear();
-                dtg_hdct.Rows.Clear();
-                foreach (var x in _iqlHD.GetListViewHoaDon().Where(c => c.TrangThai.Contains(cbb_loc.Text)))
+                // lstVHD = _iqlHD.GetListViewHoaDon();
+                foreach (var x in _iqlHD.GetHD().Where(c=>c.HoaDons.TrangThai.Contains(cbb_loc.Text))/*.Where(c=>c.Id == _idHD)*/)
                 {
-                    dtg_hd.Rows.Add(x.Id, stt++, x.MaHoaDon, x.TenNhanVien, x.TenKhachHang, x.NgayTao, x.GhiChu, x.TongTien, x.TrangThai);
+
+                    dtg_hd.Rows.Add(x.HoaDons.Id, stt++, x.HoaDons.MaHoaDon, x.NhanViens.Ten, x.KhachHangs.Ten, x.HoaDons.NgayTao, x.HoaDons.GhiChu, x.HoaDons.DonGia, x.HoaDons.TrangThai);
                 }
             }
             
