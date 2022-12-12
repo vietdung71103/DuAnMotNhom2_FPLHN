@@ -74,6 +74,10 @@ namespace _3.PL.Views
         //public decimal DonGia { get; set; }
         private void btn_taohoadon_Click(object sender, EventArgs e)
         {
+            string ma = "HD";
+            Random rand = new Random();
+            int z = rand.Next(1000, 9999);
+            var so = z.ToString();
             int mahd = _iqlHD.GetListHoaDon().Count + 1;
             DialogResult result = MessageBox.Show("Bạn có muốn tạo hoá đơn ?", "Thông báo", MessageBoxButtons.YesNo);
             if(result == DialogResult.Yes){
@@ -92,7 +96,7 @@ namespace _3.PL.Views
                         //hd.Id = Guid.NewGuid();
                         hd.IdKhachHang = _khachHang.Id;
                         hd.IdNhanVien = _idNV;
-                        hd.MaHoaDon = "HD0" + mahd;
+                        hd.MaHoaDon = ma + so;
                         hd.NgayTao = DateTime.Now;
                         hd.DonGia =tong;
                         hd.TrangThai = "Chưa thanh toán";
@@ -321,8 +325,14 @@ namespace _3.PL.Views
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow r = dtg_giohang.Rows[e.RowIndex];
-                _idSP = Guid.Parse(r.Cells[6].Value.ToString());
-
+                if(r.Cells[6].Value != null)
+                {
+                    _idSP = Guid.Parse(r.Cells[6].Value.ToString());
+                }
+                else
+                {
+                    /*MessageBox.Show("Giỏ hàng này không khả dụng");*/return;
+                }
 
             }
         }
@@ -439,7 +449,15 @@ namespace _3.PL.Views
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow r = dtg_donhangcho.Rows[e.RowIndex];
-                _idHD = Guid.Parse(Convert.ToString(r.Cells[0].Value));
+                if (r.Cells[0].Value != null)
+                {
+                    _idHD = Guid.Parse(Convert.ToString(r.Cells[0].Value));
+                }
+                else
+                {
+                    return;
+                }
+               
 
                 tbt_mahd.Text = Convert.ToString(r.Cells[2].Value);
                 var hdct = _iqlHDCT.GetListHoaDonCT().Where(c => c.IdHoaDon == _idHD);
@@ -622,6 +640,78 @@ namespace _3.PL.Views
                 }
                 LoadGioHang();
                 tbt_qr.Text = "";
+            }
+        }
+
+        private void btn_sua_Click(object sender, EventArgs e)
+        {
+            if (_idHD != null)
+            {
+                if (_lstVHDCT.Any())
+                {
+                    decimal total = 0;
+                    var c = _iqlKH.GetListKhachHang().FirstOrDefault(x => x.Ma.Contains(cbb_khachhang.Text));
+                    if (c != null)
+                    {
+                        var order = _iqlHD.GetListHoaDon().FirstOrDefault(x => x.Id == _idHD);
+                        var odd = _iqlHDCT.GetListHoaDonCT().Where(x => x.IdHoaDon == _idHD);
+                        foreach (var item in odd)
+                        {
+                            _iqlHDCT.DeleteHDCT(item);
+                        }
+
+
+                        foreach (var item in _lstVHDCT)
+                        {
+                            HoaDonChiTiet od = new HoaDonChiTiet()
+                            {
+                                IdHoaDon = _idHD,
+                                IdSachChiTiet = item.IdSachChiTiet,
+                                GiaBan = item.GiaBan,
+                                SoLuong = item.SoLuong
+                            };
+                            total += Convert.ToInt32(item.GiaBan * item.SoLuong);
+                            _iqlHDCT.AddHDCT(od);
+                            var p = _iqlSP.GetAll().Where(x => x.SachChiTiets.Id == item.IdSachChiTiet);
+                            foreach (var cx in p)
+                            {
+                                cx.SachChiTiets.SoLuongTon -= item.SoLuong;
+                                _iqlSP.Update(cx.SachChiTiets);
+                            }
+                            
+                            
+                        }
+
+                        Guid eID = _iqlNV.GetListNV().FirstOrDefault(x => x.Email == Properties.Settings1.Default.userlogined).Id;
+                        order.NgayTao = DateTime.Now;
+                        order.IdNhanVien = eID;
+                        order.IdKhachHang = c.Id;
+                        order.DonGia = total;
+                        _iqlHD.Update(order);
+
+                        tbt_mahd.Text = "";
+                        lb_tongtien.Text = total.ToString();
+                        tbt_ghichu.Text = "";
+                        lb_total.Text = "";
+                        MessageBox.Show($"Cập nhật thành công hoá đơn: {order.MaHoaDon} ");
+                         
+                        LoadSanPham();
+                        LoadHDCho();
+                        dtg_giohang.Rows.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vui lòng nhập khách hàng");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Chưa có sản phẩm nào trong giỏ hàng");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hóa đơn chưa thanh toán");
             }
         }
     }

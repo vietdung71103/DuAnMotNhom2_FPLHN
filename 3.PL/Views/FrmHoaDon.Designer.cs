@@ -30,7 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHoaDon));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.tbt_xoahd = new System.Windows.Forms.Button();
+            this.lb_tongtien = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.cbb_loc = new System.Windows.Forms.ComboBox();
             this.tbt_ghichu = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -45,6 +49,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.dtp_ngaytao = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
+            this.dtg_hd = new System.Windows.Forms.DataGridView();
             this.tbt_mahd = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -55,17 +60,21 @@
             this.tbt_dongia = new System.Windows.Forms.TextBox();
             this.tbt_sl = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.dtg_hd = new System.Windows.Forms.DataGridView();
+            this.sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_hdct)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.tbt_xoahd);
+            this.groupBox1.Controls.Add(this.lb_tongtien);
             this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.cbb_loc);
             this.groupBox1.Controls.Add(this.tbt_ghichu);
             this.groupBox1.Controls.Add(this.label9);
@@ -90,6 +99,42 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Hoá đơn";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(997, 168);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(52, 29);
+            this.label12.TabIndex = 36;
+            this.label12.Text = "VNĐ";
+            // 
+            // tbt_xoahd
+            // 
+            this.tbt_xoahd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tbt_xoahd.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tbt_xoahd.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.tbt_xoahd.Image = ((System.Drawing.Image)(resources.GetObject("tbt_xoahd.Image")));
+            this.tbt_xoahd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tbt_xoahd.Location = new System.Drawing.Point(1093, 164);
+            this.tbt_xoahd.Name = "tbt_xoahd";
+            this.tbt_xoahd.Size = new System.Drawing.Size(118, 30);
+            this.tbt_xoahd.TabIndex = 5;
+            this.tbt_xoahd.Text = "Xoá hoá đơn";
+            this.tbt_xoahd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.tbt_xoahd.UseVisualStyleBackColor = true;
+            this.tbt_xoahd.Click += new System.EventHandler(this.tbt_xoahd_Click);
+            // 
+            // lb_tongtien
+            // 
+            this.lb_tongtien.AutoSize = true;
+            this.lb_tongtien.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_tongtien.Location = new System.Drawing.Point(862, 168);
+            this.lb_tongtien.Name = "lb_tongtien";
+            this.lb_tongtien.Size = new System.Drawing.Size(68, 29);
+            this.lb_tongtien.TabIndex = 35;
+            this.lb_tongtien.Text = "...........";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -99,6 +144,16 @@
             this.label11.Size = new System.Drawing.Size(92, 18);
             this.label11.TabIndex = 30;
             this.label11.Text = "Lọc trạng thái:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(683, 168);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(142, 29);
+            this.label14.TabIndex = 34;
+            this.label14.Text = "Tổng hoá đơn:";
             // 
             // cbb_loc
             // 
@@ -234,6 +289,19 @@
             this.label1.TabIndex = 16;
             this.label1.Text = "Mã hoá đơn:";
             // 
+            // dtg_hd
+            // 
+            this.dtg_hd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dtg_hd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtg_hd.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dtg_hd.Location = new System.Drawing.Point(3, 200);
+            this.dtg_hd.Name = "dtg_hd";
+            this.dtg_hd.RowTemplate.Height = 25;
+            this.dtg_hd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dtg_hd.Size = new System.Drawing.Size(1214, 134);
+            this.dtg_hd.TabIndex = 0;
+            this.dtg_hd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_hd_CellClick);
+            // 
             // tbt_mahd
             // 
             this.tbt_mahd.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
@@ -264,30 +332,30 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(836, 67);
+            this.label10.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(717, 101);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(58, 33);
+            this.label10.Size = new System.Drawing.Size(48, 27);
             this.label10.TabIndex = 33;
             this.label10.Text = "VNĐ";
             // 
             // lb_total
             // 
             this.lb_total.AutoSize = true;
-            this.lb_total.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lb_total.Location = new System.Drawing.Point(701, 67);
+            this.lb_total.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lb_total.Location = new System.Drawing.Point(582, 101);
             this.lb_total.Name = "lb_total";
-            this.lb_total.Size = new System.Drawing.Size(70, 33);
+            this.lb_total.Size = new System.Drawing.Size(56, 27);
             this.lb_total.TabIndex = 32;
             this.lb_total.Text = "...........";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(552, 67);
+            this.label8.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(433, 101);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 33);
+            this.label8.Size = new System.Drawing.Size(105, 27);
             this.label8.TabIndex = 31;
             this.label8.Text = "Thành tiền:";
             // 
@@ -342,18 +410,11 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Số lượng:";
             // 
-            // dtg_hd
+            // sqlCommandBuilder1
             // 
-            this.dtg_hd.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtg_hd.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtg_hd.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dtg_hd.Location = new System.Drawing.Point(3, 172);
-            this.dtg_hd.Name = "dtg_hd";
-            this.dtg_hd.RowTemplate.Height = 25;
-            this.dtg_hd.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dtg_hd.Size = new System.Drawing.Size(1214, 162);
-            this.dtg_hd.TabIndex = 0;
-            this.dtg_hd.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtg_hd_CellClick);
+            this.sqlCommandBuilder1.DataAdapter = null;
+            this.sqlCommandBuilder1.QuotePrefix = "[";
+            this.sqlCommandBuilder1.QuoteSuffix = "]";
             // 
             // FrmHoaDon
             // 
@@ -369,10 +430,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_hdct)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dtg_hd)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -406,5 +467,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox cbb_loc;
         private System.Windows.Forms.DataGridView dtg_hd;
+        private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
+        private System.Windows.Forms.Button tbt_xoahd;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lb_tongtien;
+        private System.Windows.Forms.Label label14;
     }
 }

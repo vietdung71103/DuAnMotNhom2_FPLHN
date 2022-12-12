@@ -206,12 +206,12 @@ namespace _3.PL.Views
             //dtg_show.Columns[9].Name = "Giá bán";
             //dtg_show.Columns[10].Name = "Số lượng tồn";
             //dtg_show.Columns[11].Name = "Số trang";
-            var checkma = _iqSP.GetAll().Where(c => c.SachChiTiets.Ma == tbt_ma.Text).Count();
-            //if (checkma != null)
-            //{
-            //    MessageBox.Show("Mã không được phép trùng");
-            //    return;
-            //}
+            var checkma = _iqSP.GetAll().Where(c => c.SachChiTiets.Ma == Ma()).Count();
+            if (checkma >1)
+            {
+                MessageBox.Show("mã không được phép trùng");
+                return;
+            }
             if (cbb_sach.Text == "")
             {
                 MessageBox.Show("Chưa chọn sách");
@@ -277,17 +277,23 @@ namespace _3.PL.Views
                 MessageBox.Show("Chưa có ảnh cho sản phẩm");
                 return;
             }
-            DialogResult result = MessageBox.Show("Bạn có muốn thêm?", "Thông báo", MessageBoxButtons.YesNo);
-            if (result == DialogResult.Yes)
+            string Ma()
             {
                 string ma = "SP";
                 Random rand = new Random();
                 int z = rand.Next(1000, 9999);
-                var so = z.ToString(); 
+                var so = z.ToString();
+                return ma + so;
+
+            }
+            DialogResult result = MessageBox.Show("Bạn có muốn thêm?", "Thông báo", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+               
 
 
                 SachChiTiet sct = new SachChiTiet();
-                sct.Ma = ma + so;
+                sct.Ma = Ma();
                 sct.IdTacGia = _iQLTG.GetListTacGia().Where(c => c.Ten == cbb_tacgia.Text).Select(c => c.Id).FirstOrDefault();
                 sct.IdNXB = _iQLNXB.GetListNXB().Where(c => c.Ten == cbb_nxb.Text).Select(c => c.Id).FirstOrDefault();
                 sct.IdTheLoai = _iQLTL.GetListTheLoai().Where(c => c.Ten == cbb_theloai.Text).Select(c => c.Id).FirstOrDefault();
@@ -542,7 +548,12 @@ namespace _3.PL.Views
 
         private void btn_loc_Click(object sender, EventArgs e)
         {
-            if(Convert.ToDecimal(tbt_gialoccao.Text) < Convert.ToDecimal(tbt_gialocthap.Text))
+            if(tbt_gialoccao.Text == "" || tbt_gialocthap.Text == "")
+            {
+                MessageBox.Show("Mời nhập giá lọc", "Cảnh báo");
+                return;
+            }
+            if (Convert.ToDecimal(tbt_gialoccao.Text) < Convert.ToDecimal(tbt_gialocthap.Text))
             {
                 MessageBox.Show("Không được nhập giá kết thúc cao hơn giá bắt đầu", "Cảnh báo");
                 return;
@@ -577,7 +588,7 @@ namespace _3.PL.Views
 
         private void FrmQLSanPham_Load(object sender, EventArgs e)
         {
-            LoadCBB();
+           
         }
 
 
@@ -649,6 +660,11 @@ namespace _3.PL.Views
             XuatFilePDF frm = new XuatFilePDF();
             this.Hide();
             frm.Show();
+        }
+
+        private void khuyếnMãiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm( new Frm_khuyenmai(),sender);
         }
     }
 }

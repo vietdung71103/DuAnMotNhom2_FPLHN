@@ -64,7 +64,7 @@ namespace _3.PL.Views
             dtg_hd.Columns[4].Name = "Khách hàng";
             dtg_hd.Columns[5].Name = "Ngày tạo";
             dtg_hd.Columns[6].Name = "Ghi chú";
-            dtg_hd.Columns[7].Name = "Đơn giá";
+            dtg_hd.Columns[7].Name = "Tổng tiền";
             dtg_hd.Columns[8].Name = "Trạng thái";
            // lstVHD = _iqlHD.GetListViewHoaDon();
             foreach (var x in _iqlHD.GetHD()/*.Where(c=>c.Id == _idHD)*/)
@@ -123,10 +123,17 @@ namespace _3.PL.Views
 
             tbt_sl.Text = Convert.ToString(dtg_hdct.Rows[rd].Cells[6].Value);
                 tbt_dongia.Text = Convert.ToString(dtg_hdct.Rows[rd].Cells[7].Value);
-               
-            
-            lb_total.Text = (Convert.ToDecimal(tbt_dongia.Text) * Convert.ToInt32(tbt_sl.Text)).ToString();
 
+            if(dtg_hdct.Rows[rd].Cells[0].Value  != null)
+            {
+                lb_total.Text = (Convert.ToDecimal(tbt_dongia.Text) * Convert.ToInt32(tbt_sl.Text)).ToString();
+            }
+            else
+            {
+                lb_total.Text = "0";
+                MessageBox.Show("Không có hoá đơn chi tiết");return;
+               
+            }
         }
 
         private void dtg_hd_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -144,13 +151,22 @@ namespace _3.PL.Views
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow r = dtg_hd.Rows[e.RowIndex];
-                _idHD = Guid.Parse(Convert.ToString(r.Cells[0].Value));
+                if(r.Cells[0].Value != null )
+                {
+                    _idHD = Guid.Parse(Convert.ToString(r.Cells[0].Value));
+                }
+                else
+                {
+                    MessageBox.Show("Hoá đơn trống", "Thông báo");
+                    return;
+                }
                 LoadHDCT(_idHD);
                 tbt_mahd.Text = Convert.ToString(r.Cells[2].Value);
                 tbt_nv.Text = Convert.ToString(r.Cells[3].Value);
                 tbt_kh.Text = Convert.ToString(r.Cells[4].Value);
                 dtp_ngaytao.Text = Convert.ToString(r.Cells[5].Value);  
                 tbt_ghichu.Text = Convert.ToString(r.Cells[6].Value);
+                lb_tongtien.Text = Convert.ToString(r.Cells[7].Value);
                 cbb_trangthai.Text = Convert.ToString(r.Cells[8].Value);
             }
            
@@ -171,7 +187,7 @@ namespace _3.PL.Views
             dtg_hd.Columns[4].Name = "Khách hàng";
             dtg_hd.Columns[5].Name = "Ngày tạo";
             dtg_hd.Columns[6].Name = "Ghi chú";
-            dtg_hd.Columns[7].Name = "Đơn giá";
+            dtg_hd.Columns[7].Name = "Tổng tiền";
             dtg_hd.Columns[8].Name = "Trạng thái";
             // lstVHD = _iqlHD.GetListViewHoaDon();
             foreach (var x in _iqlHD.GetListHoaDon().Where(c=>c.MaHoaDon.ToLower().Contains(tbt_timkiem.Text.ToLower()))/*.Where(c=>c.Id == _idHD)*/)
@@ -198,7 +214,7 @@ namespace _3.PL.Views
                 dtg_hd.Columns[4].Name = "Khách hàng";
                 dtg_hd.Columns[5].Name = "Ngày tạo";
                 dtg_hd.Columns[6].Name = "Ghi chú";
-                dtg_hd.Columns[7].Name = "Đơn giá";
+                dtg_hd.Columns[7].Name = "Tổng tiền";
                 dtg_hd.Columns[8].Name = "Trạng thái";
                 // lstVHD = _iqlHD.GetListViewHoaDon();
                 foreach (var x in _iqlHD.GetHD().Where(c=>c.HoaDons.TrangThai.Contains(cbb_loc.Text))/*.Where(c=>c.Id == _idHD)*/)
@@ -208,6 +224,31 @@ namespace _3.PL.Views
                 }
             }
             
+        }
+
+        private void tbt_xoahd_Click(object sender, EventArgs e)
+        {
+            var xoa = _iqlHD.GetListHoaDon().FirstOrDefault(c => c.Id == _idHD);
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xoá hoá đơn", "Thông báo", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                if(xoa.TrangThai == "Đã thanh toán")
+                {
+                    MessageBox.Show("Hoá đơn đã thanh toán, không thể xoá");
+                    return;
+                }
+                else
+                {
+                    _iqlHD.Delete(xoa);
+                    MessageBox.Show("Xoá thành công", "Thông báo");
+                    LoadHoaDon();
+                }
+            }
+            if(result != DialogResult.Yes)
+            {
+                MessageBox.Show("Xoá hoá đơn thất bại", "Thông báo");
+                return;
+            }
         }
     }
 }

@@ -206,6 +206,34 @@ namespace _1.DAL.Migrations
                     b.ToTable("KhachHang");
                 });
 
+            modelBuilder.Entity("_1.DAL.Models.KhuyenMais", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChiTiet")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("NgayBatDau")
+                        .HasColumnType("DateTime")
+                        .HasColumnName("NgayBatDau");
+
+                    b.Property<DateTime>("NgayKetThuc")
+                        .HasColumnType("DateTime")
+                        .HasColumnName("NgayKetThuc");
+
+                    b.Property<int>("PhanTram")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TenKhuyenMai")
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("KhuyenMais");
+                });
+
             modelBuilder.Entity("_1.DAL.Models.NXB", b =>
                 {
                     b.Property<Guid>("Id")

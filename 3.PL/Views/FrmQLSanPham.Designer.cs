@@ -75,6 +75,7 @@
             this.cbb_nxb = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btn_xuat = new System.Windows.Forms.Button();
             this.btn_nhap = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.tbt_timkiem = new System.Windows.Forms.TextBox();
@@ -83,7 +84,7 @@
             this.btn_them = new System.Windows.Forms.Button();
             this.dtg_show = new System.Windows.Forms.DataGridView();
             this.sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
-            this.btn_xuat = new System.Windows.Forms.Button();
+            this.khuyếnMãiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panelhome.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -130,7 +131,8 @@
             this.nhàXuấtBảnToolStripMenuItem,
             this.thểLoạiToolStripMenuItem,
             this.sáchToolStripMenuItem,
-            this.tácGiảToolStripMenuItem});
+            this.tácGiảToolStripMenuItem,
+            this.khuyếnMãiToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1324, 31);
@@ -583,6 +585,19 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hiển thị";
             // 
+            // btn_xuat
+            // 
+            this.btn_xuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_xuat.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_xuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_xuat.Location = new System.Drawing.Point(464, 29);
+            this.btn_xuat.Name = "btn_xuat";
+            this.btn_xuat.Size = new System.Drawing.Size(156, 36);
+            this.btn_xuat.TabIndex = 21;
+            this.btn_xuat.Text = "Xuất file PDF";
+            this.btn_xuat.UseVisualStyleBackColor = true;
+            this.btn_xuat.Click += new System.EventHandler(this.btn_xuat_Click);
+            // 
             // btn_nhap
             // 
             this.btn_nhap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -677,18 +692,12 @@
             this.sqlCommandBuilder1.QuotePrefix = "[";
             this.sqlCommandBuilder1.QuoteSuffix = "]";
             // 
-            // btn_xuat
+            // khuyếnMãiToolStripMenuItem
             // 
-            this.btn_xuat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_xuat.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btn_xuat.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_xuat.Location = new System.Drawing.Point(464, 29);
-            this.btn_xuat.Name = "btn_xuat";
-            this.btn_xuat.Size = new System.Drawing.Size(156, 36);
-            this.btn_xuat.TabIndex = 21;
-            this.btn_xuat.Text = "Xuất file PDF";
-            this.btn_xuat.UseVisualStyleBackColor = true;
-            this.btn_xuat.Click += new System.EventHandler(this.btn_xuat_Click);
+            this.khuyếnMãiToolStripMenuItem.Name = "khuyếnMãiToolStripMenuItem";
+            this.khuyếnMãiToolStripMenuItem.Size = new System.Drawing.Size(107, 27);
+            this.khuyếnMãiToolStripMenuItem.Text = "Khuyến mãi";
+            this.khuyếnMãiToolStripMenuItem.Click += new System.EventHandler(this.khuyếnMãiToolStripMenuItem_Click);
             // 
             // FrmQLSanPham
             // 
@@ -778,5 +787,6 @@
         private System.Windows.Forms.Button btn_nhap;
         private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
         private System.Windows.Forms.Button btn_xuat;
+        private System.Windows.Forms.ToolStripMenuItem khuyếnMãiToolStripMenuItem;
     }
 }

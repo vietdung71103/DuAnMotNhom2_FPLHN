@@ -30,8 +30,9 @@ namespace _1.DAL.Context
         public DbSet<SachChiTiet> SachChiTiets { get; set; }
         public DbSet<TacGia> TacGias { get; set; }
         public DbSet<TheLoai> TheLoais { get; set; }
-      
-        
+        //public DbSet<KhuyenMai> khuyenmai { get; set; }
+
+
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    // Thực hiện các ràng buộc kết nối

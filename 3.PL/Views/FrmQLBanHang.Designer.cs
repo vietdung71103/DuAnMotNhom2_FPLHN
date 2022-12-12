@@ -77,6 +77,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.lb_mnv = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btn_sua = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcb_qr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtg_giohang)).BeginInit();
@@ -91,6 +92,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_sua);
             this.groupBox1.Controls.Add(this.tbt_qr);
             this.groupBox1.Controls.Add(this.btn_quetma);
             this.groupBox1.Controls.Add(this.label4);
@@ -612,6 +614,20 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btn_sua
+            // 
+            this.btn_sua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_sua.Font = new System.Drawing.Font("Bahnschrift SemiBold SemiConden", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.btn_sua.Image = ((System.Drawing.Image)(resources.GetObject("btn_sua.Image")));
+            this.btn_sua.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_sua.Location = new System.Drawing.Point(3, 80);
+            this.btn_sua.Name = "btn_sua";
+            this.btn_sua.Size = new System.Drawing.Size(127, 44);
+            this.btn_sua.TabIndex = 16;
+            this.btn_sua.Text = "Cập nhật";
+            this.btn_sua.UseVisualStyleBackColor = true;
+            this.btn_sua.Click += new System.EventHandler(this.btn_sua_Click);
+            // 
             // FrmQLBanHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -700,5 +716,6 @@
         private System.Windows.Forms.PictureBox pcb_qr;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TextBox tbt_qr;
+        private System.Windows.Forms.Button btn_sua;
     }
 }
